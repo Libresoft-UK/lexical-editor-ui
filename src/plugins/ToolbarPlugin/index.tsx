@@ -729,7 +729,7 @@ export default function ToolbarPlugin({
   const activeButtonClassName = 'bg-default-500 text-default-50';
 
   return (
-      <div className="flex flex-row h-10 gap-2 p-1">
+      <div className="flex flex-row h-12 gap-2 p-1 overflow-auto">
       <button
         disabled={!toolbarState.canUndo || !isEditable}
         onClick={() => {

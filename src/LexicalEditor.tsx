@@ -26,7 +26,6 @@ import {SharedHistoryContext} from './context/SharedHistoryContext';
 import {ToolbarContext} from './context/ToolbarContext';
 import Editor from './Editor';
 import PlaygroundNodes from './nodes/PlaygroundNodes';
-import {TableContext} from './plugins/TablePlugin';
 import {parseAllowedFontSize} from './plugins/ToolbarPlugin/fontSize';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import {parseAllowedColor} from './ui/ColorPicker';
@@ -228,16 +227,14 @@ export function LexicalEditor({src = null, onChange, debug = false}:LexicalEdito
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <SharedHistoryContext>
-        <TableContext>
-          <ToolbarContext>
-            <div className="bg-default-50 text-default-500 flex flex-col h-full rounded-md p-1">
-              <Editor />
-            </div>
-            {debug && <TreeViewPlugin/>}
-            {/*{isDevPlayground ? <DocsPlugin /> : null}*/}
-            {/*{isDevPlayground ? <PasteLogPlugin /> : null}*/}
-          </ToolbarContext>
-        </TableContext>
+        <ToolbarContext>
+          <div className="bg-default-50 text-default-500 flex flex-col h-full rounded-md p-1 overflow-auto">
+            <Editor />
+          </div>
+          {debug && <TreeViewPlugin/>}
+          {/*{isDevPlayground ? <DocsPlugin /> : null}*/}
+          {/*{isDevPlayground ? <PasteLogPlugin /> : null}*/}
+        </ToolbarContext>
       </SharedHistoryContext>
       <InitialiseValuePlugin src={src} />
       <OnChangePlugin onChange={handleOnChange} ignoreSelectionChange={true} />

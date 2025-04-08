@@ -16,7 +16,6 @@ import { SharedHistoryContext } from './context/SharedHistoryContext';
 import { ToolbarContext } from './context/ToolbarContext';
 import Editor from './Editor';
 import PlaygroundNodes from './nodes/PlaygroundNodes';
-import { TableContext } from './plugins/TablePlugin';
 import { parseAllowedFontSize } from './plugins/ToolbarPlugin/fontSize';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import { parseAllowedColor } from './ui/ColorPicker';
@@ -142,5 +141,5 @@ export function LexicalEditor({ src = null, onChange, debug = false }) {
         // Call onChange with the JSON string and the HTML string
         onChange && onChange(jsonString, '');
     }
-    return (_jsxs(LexicalComposer, { initialConfig: initialConfig, children: [_jsx(SharedHistoryContext, { children: _jsx(TableContext, { children: _jsxs(ToolbarContext, { children: [_jsx("div", { className: "bg-default-50 text-default-500 flex flex-col h-full rounded-md p-1", children: _jsx(Editor, {}) }), debug && _jsx(TreeViewPlugin, {})] }) }) }), _jsx(InitialiseValuePlugin, { src: src }), _jsx(OnChangePlugin, { onChange: handleOnChange, ignoreSelectionChange: true })] }));
+    return (_jsxs(LexicalComposer, { initialConfig: initialConfig, children: [_jsx(SharedHistoryContext, { children: _jsxs(ToolbarContext, { children: [_jsx("div", { className: "bg-default-50 text-default-500 flex flex-col h-full rounded-md p-1 overflow-auto", children: _jsx(Editor, {}) }), debug && _jsx(TreeViewPlugin, {})] }) }), _jsx(InitialiseValuePlugin, { src: src }), _jsx(OnChangePlugin, { onChange: handleOnChange, ignoreSelectionChange: true })] }));
 }

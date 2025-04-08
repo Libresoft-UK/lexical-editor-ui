@@ -71,17 +71,17 @@ function PortalImpl({
   }, [closeOnClickOutside, onClose]);
 
   return (
-    <div className="Modal__overlay" role="dialog">
-      <div className="Modal__modal" tabIndex={-1} ref={modalRef}>
-        <h2 className="Modal__title">{title}</h2>
+    <div className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-50 flex justify-center items-center z-[100]" role="dialog">
+      <div className="p-5 min-h-24 min-w-72 bg-default-50 rounded-lg shadow relative flex flex-col" tabIndex={-1} ref={modalRef}>
+        <h2 className="text-lg text-default-700">{title}</h2>
         <button
-          className="Modal__closeButton"
+          className="text-xl absolute top-2 right-2 text-default-500 rounded-full hover:text-default-700 focus:outline-none"
           aria-label="Close modal"
           type="button"
           onClick={onClose}>
-          X
+          x
         </button>
-        <div className="Modal__content">{children}</div>
+        <div className="p-1">{children}</div>
       </div>
     </div>
   );

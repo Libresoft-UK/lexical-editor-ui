@@ -259,7 +259,7 @@ export default function DropDown({
         ref={buttonRef}>
         {buttonIconClassName && <span className={buttonIconClassName} />}
         {buttonLabel && (
-          <span className="text dropdown-button-text">{buttonLabel}</span>
+          <span className="text dropdown-button-text text-nowrap">{buttonLabel}</span>
         )}
         {buttonElement}
         <i className="chevron-down" />

@@ -152,16 +152,6 @@ export function UpdateInlineImageDialog({
         <option value="full">Full Width</option>
       </Select>
 
-      <div className="Input__wrapper">
-        <input
-          id="caption"
-          type="checkbox"
-          checked={showCaption}
-          onChange={handleShowCaptionChange}
-        />
-        <label htmlFor="caption">Show Caption</label>
-      </div>
-
       <DialogActions>
         <Button
           data-test-id="image-modal-file-upload-btn"

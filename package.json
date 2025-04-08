@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.json && copyfiles -u 1 src/**/*.css src/images/**/* dist/",
     "start": "npm run build && node dist/index.js",
-    "dev": "nodemon --watch \"src/**/*\" --ext \"ts,tsx,js,json\" --exec \"npm run build\""
+    "dev": "nodemon --watch \"src/**/*\" --ext \"ts,tsx,js,json,css\" --exec \"npm run build\""
   },
   "peerDependencies": {
     "react": ">=18",
@@ -19,7 +19,8 @@
     "copyfiles": "^2.4.1",
     "css-loader": "^7.1.2",
     "nodemon": "^3.1.7",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "tailwindcss": "^3.3.5"
   },
   "author": "",
   "license": "MIT",

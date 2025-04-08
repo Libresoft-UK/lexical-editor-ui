@@ -31,11 +31,11 @@ export default function TextInput({
   type = 'text',
 }: Props): JSX.Element {
   return (
-    <div className="Input__wrapper">
-      <label className="Input__label">{label}</label>
+    <div className="flex flex-row items-center mb-2 gap-2">
+      <label className="text-default-700 flex flex-1">{label}</label>
       <input
         type={type}
-        className="Input__input"
+        className="flex-1 bg-default-200 border-0 text-default-700 text-sm rounded-lg block p-2.5 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none focus-visible:border-blue-500"
         placeholder={placeholder}
         value={value}
         onChange={(e) => {

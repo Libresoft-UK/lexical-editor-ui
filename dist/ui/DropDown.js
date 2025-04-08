@@ -128,6 +128,6 @@ export default function DropDown({ disabled = false, buttonLabel, buttonAriaLabe
             document.removeEventListener('scroll', handleButtonPositionUpdate);
         };
     }, [buttonRef, dropDownRef, showDropDown]);
-    return (_jsxs(_Fragment, { children: [_jsxs("button", { type: "button", disabled: disabled, "aria-label": buttonAriaLabel, className: buttonClassName, onClick: () => setShowDropDown(!showDropDown), ref: buttonRef, children: [buttonIconClassName && _jsx("span", { className: buttonIconClassName }), buttonLabel && (_jsx("span", { className: "text dropdown-button-text", children: buttonLabel })), buttonElement, _jsx("i", { className: "chevron-down" })] }), showDropDown &&
+    return (_jsxs(_Fragment, { children: [_jsxs("button", { type: "button", disabled: disabled, "aria-label": buttonAriaLabel, className: buttonClassName, onClick: () => setShowDropDown(!showDropDown), ref: buttonRef, children: [buttonIconClassName && _jsx("span", { className: buttonIconClassName }), buttonLabel && (_jsx("span", { className: "text dropdown-button-text text-nowrap", children: buttonLabel })), buttonElement, _jsx("i", { className: "chevron-down" })] }), showDropDown &&
                 createPortal(_jsx(DropDownItems, { dropDownRef: dropDownRef, onClose: handleClose, children: children }), document.body)] }));
 }

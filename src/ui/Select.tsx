@@ -24,11 +24,11 @@ export default function Select({
   ...other
 }: SelectProps): JSX.Element {
   return (
-    <div className="Input__wrapper">
-      <label style={{marginTop: '-1em'}} className="Input__label">
+    <div className="flex flex-row items-center mb-2 gap-2">
+      <label style={{marginTop: '-1em'}} className="text-default-700 flex flex-1">
         {label}
       </label>
-      <select {...other} className={className || 'select'}>
+      <select {...other} className={ className + " bg-default-200 border border-gray-300 text-default-700 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "}>
         {children}
       </select>
     </div>

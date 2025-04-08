@@ -36,7 +36,7 @@ export default function Button({
     <button
       disabled={disabled}
       className={joinClasses(
-        'Button__root',
+        'bg-primary-500 text-white rounded-md px-2 py-1 hover:bg-primary-600 disabled:opacity-50 disabled:pointer-events-none',
         disabled && 'Button__disabled',
         small && 'Button__small',
         className,

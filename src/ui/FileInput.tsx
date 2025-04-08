@@ -26,12 +26,12 @@ export default function FileInput({
   'data-test-id': dataTestId,
 }: Props): JSX.Element {
   return (
-    <div className="Input__wrapper">
-      <label className="Input__label">{label}</label>
+    <div className="flex flex-row items-center mb-2 gap-2">
+      <label className="text-default-700 flex flex-1">{label}</label>
       <input
         type="file"
         accept={accept}
-        className="Input__input"
+        className="bg-default-200 text-default-700 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
         onChange={(e) => onChange(e.target.files)}
         data-test-id={dataTestId}
       />

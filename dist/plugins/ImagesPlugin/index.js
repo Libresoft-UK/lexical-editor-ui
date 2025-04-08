@@ -3,8 +3,6 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { $wrapNodeInElement, mergeRegister } from '@lexical/utils';
 import { $createParagraphNode, $createRangeSelection, $getSelection, $insertNodes, $isNodeSelection, $isRootOrShadowRoot, $setSelection, COMMAND_PRIORITY_EDITOR, COMMAND_PRIORITY_HIGH, COMMAND_PRIORITY_LOW, createCommand, DRAGOVER_COMMAND, DRAGSTART_COMMAND, DROP_COMMAND, getDOMSelectionFromTarget, isHTMLElement, } from 'lexical';
 import { useEffect, useRef, useState } from 'react';
-import landscapeImage from '../../images/landscape.jpg';
-import yellowFlowerImage from '../../images/yellow-flower.jpg';
 import { $createImageNode, $isImageNode, ImageNode, } from '../../nodes/ImageNode';
 import Button from '../../ui/Button';
 import { DialogActions, DialogButtonsList } from '../../ui/Dialog';
@@ -52,15 +50,7 @@ export function InsertImageDialog({ activeEditor, onClose, }) {
         activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
         onClose();
     };
-    return (_jsxs(_Fragment, { children: [!mode && (_jsxs(DialogButtonsList, { children: [_jsx(Button, { "data-test-id": "image-modal-option-sample", onClick: () => onClick(hasModifier.current
-                            ? {
-                                altText: 'Daylight fir trees forest glacier green high ice landscape',
-                                src: landscapeImage,
-                            }
-                            : {
-                                altText: 'Yellow flower in tilt shift lens',
-                                src: yellowFlowerImage,
-                            }), children: "Sample" }), _jsx(Button, { "data-test-id": "image-modal-option-url", onClick: () => setMode('url'), children: "URL" }), _jsx(Button, { "data-test-id": "image-modal-option-file", onClick: () => setMode('file'), children: "File" })] })), mode === 'url' && _jsx(InsertImageUriDialogBody, { onClick: onClick }), mode === 'file' && _jsx(InsertImageUploadedDialogBody, { onClick: onClick })] }));
+    return (_jsxs(_Fragment, { children: [!mode && (_jsxs(DialogButtonsList, { children: [_jsx(Button, { "data-test-id": "image-modal-option-url", onClick: () => setMode('url'), children: "URL" }), _jsx(Button, { "data-test-id": "image-modal-option-file", onClick: () => setMode('file'), children: "File" })] })), mode === 'url' && _jsx(InsertImageUriDialogBody, { onClick: onClick }), mode === 'file' && _jsx(InsertImageUploadedDialogBody, { onClick: onClick })] }));
 }
 export default function ImagesPlugin({ captionsEnabled, }) {
     const [editor] = useLexicalComposerContext();

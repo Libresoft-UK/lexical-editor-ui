@@ -19,7 +19,7 @@ export default function TreeViewPlugin(): JSX.Element {
         <div className={'bg-red-500'}>Debug:</div>
         <div className={'text-small'} >
           <TreeView
-            viewClassName="tree-view-output"
+            viewClassName="tree-view-output overflow-scroll"
             treeTypeButtonClassName="debug-treetype-button"
             timeTravelPanelClassName="debug-timetravel-panel"
             timeTravelButtonClassName="debug-timetravel-button"

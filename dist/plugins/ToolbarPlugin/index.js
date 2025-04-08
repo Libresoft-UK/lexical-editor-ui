@@ -296,7 +296,7 @@ export default function ToolbarPlugin({ editor, activeEditor, setActiveEditor, s
     const canViewerSeeInsertCodeButton = !toolbarState.isImageCaption;
     const buttonClassName = 'cursor-pointer rounded hover:bg-default-900 hover:text-default-50 disabled:opacity-50';
     const activeButtonClassName = 'bg-default-500 text-default-50';
-    return (_jsxs("div", { className: "flex flex-row h-10 gap-2 p-1", children: [_jsx("button", { disabled: !toolbarState.canUndo || !isEditable, onClick: () => {
+    return (_jsxs("div", { className: "flex flex-row h-12 gap-2 p-1 overflow-auto", children: [_jsx("button", { disabled: !toolbarState.canUndo || !isEditable, onClick: () => {
                     activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
                 }, title: IS_APPLE ? 'Undo (⌘Z)' : 'Undo (Ctrl+Z)', type: "button", className: buttonClassName, "aria-label": "Undo", children: _jsx(ArrowCounterclockwise, { size: 24 }) }), _jsx("button", { disabled: !toolbarState.canRedo || !isEditable, onClick: () => {
                     activeEditor.dispatchCommand(REDO_COMMAND, undefined);
