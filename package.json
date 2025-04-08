@@ -1,0 +1,30 @@
+{
+  "name": "lexical-editor-ui",
+  "version": "1.0.0",
+  "description": "Lexical Editor with Tailwind UI",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json && copyfiles -u 1 src/**/*.css src/images/**/* dist/",
+    "start": "npm run build && node dist/index.js",
+    "dev": "nodemon --watch \"src/**/*\" --ext \"ts,tsx,js,json\" --exec \"npm run build\""
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.6",
+    "copyfiles": "^2.4.1",
+    "css-loader": "^7.1.2",
+    "nodemon": "^3.1.7",
+    "typescript": "^5.3.3"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@lexical/react": "^0.30.0",
+    "react-bootstrap-icons": "^1.11.5"
+  }
+}

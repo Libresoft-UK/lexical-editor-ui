@@ -1,0 +1,1 @@
+export declare function setFloatingElemPosition(targetRect: DOMRect | null, floatingElem: HTMLElement, anchorElem: HTMLElement, isLink?: boolean, verticalGap?: number, horizontalOffset?: number): void;
