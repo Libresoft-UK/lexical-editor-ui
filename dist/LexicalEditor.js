@@ -135,11 +135,11 @@ export function LexicalEditor({ src = null, onChange, debug = false }) {
         editor.read(() => {
             const htmlString = $generateHtmlFromNodes(editor, null);
             debug && console.log('HTML String:', htmlString);
+            // Call onChange with the JSON string and the HTML string
+            onChange && onChange(jsonString, htmlString);
         });
         // Set the editor state to the JSON string
         setEditorState(jsonString);
-        // Call onChange with the JSON string and the HTML string
-        onChange && onChange(jsonString, '');
     }
     return (_jsxs(LexicalComposer, { initialConfig: initialConfig, children: [_jsx(SharedHistoryContext, { children: _jsxs(ToolbarContext, { children: [_jsx("div", { className: "bg-default-50 text-default-500 flex flex-col h-full rounded-md p-1 overflow-auto", children: _jsx(Editor, {}) }), debug && _jsx(TreeViewPlugin, {})] }) }), _jsx(InitialiseValuePlugin, { src: src }), _jsx(OnChangePlugin, { onChange: handleOnChange, ignoreSelectionChange: true })] }));
 }

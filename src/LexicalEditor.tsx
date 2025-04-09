@@ -215,13 +215,13 @@ export function LexicalEditor({src = null, onChange, debug = false}:LexicalEdito
     editor.read(() => {
       const htmlString = $generateHtmlFromNodes(editor, null);
       debug && console.log('HTML String:', htmlString);
+      // Call onChange with the JSON string and the HTML string
+      onChange && onChange(jsonString, htmlString);
     })
 
     // Set the editor state to the JSON string
     setEditorState(jsonString);
 
-    // Call onChange with the JSON string and the HTML string
-    onChange && onChange(jsonString, '');
   }
 
   return (
