@@ -96,7 +96,7 @@ import {
   Superscript, TextCenter, TextIndentLeft, TextIndentRight, TextLeft, TextParagraph, TextRight,
   Type,
   TypeBold,
-  TypeH1, TypeH2, TypeH3,
+  TypeH1, TypeH2, TypeH3, TypeH4, TypeH5, TypeH6,
   TypeItalic,
   TypeStrikethrough,
   TypeUnderline
@@ -242,6 +242,30 @@ function BlockFormatDropDown({
         icon={<TypeH3 size={24} />}
       >
           <span className="text">Heading 3</span>
+      </DropDownItem>
+      <DropDownItem
+          className={'item wide ' + dropDownActiveClass(blockType === 'h4')}
+          onClick={() => formatHeading(editor, blockType, 'h4')}
+          shortcut={SHORTCUTS.HEADING4}
+          icon={<TypeH4 size={24} />}
+      >
+        <span className="text">Heading 4</span>
+      </DropDownItem>
+      <DropDownItem
+          className={'item wide ' + dropDownActiveClass(blockType === 'h5')}
+          onClick={() => formatHeading(editor, blockType, 'h5')}
+          shortcut={SHORTCUTS.HEADING5}
+          icon={<TypeH5 size={24} />}
+      >
+        <span className="text">Heading 5</span>
+      </DropDownItem>
+      <DropDownItem
+          className={'item wide ' + dropDownActiveClass(blockType === 'h6')}
+          onClick={() => formatHeading(editor, blockType, 'h6')}
+          shortcut={SHORTCUTS.HEADING6}
+          icon={<TypeH6 size={24} />}
+      >
+        <span className="text">Heading 6</span>
       </DropDownItem>
       <DropDownItem
         className={'item wide ' + dropDownActiveClass(blockType === 'bullet')}
@@ -735,7 +759,7 @@ export default function ToolbarPlugin({
         onClick={() => {
           activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
         }}
-        title={IS_APPLE ? 'Undo (⌘Z)' : 'Undo (Ctrl+Z)'}
+        title={`Undo (${SHORTCUTS.UNDO})`}
         type="button"
         className={buttonClassName}
         aria-label="Undo">
@@ -746,7 +770,7 @@ export default function ToolbarPlugin({
         onClick={() => {
           activeEditor.dispatchCommand(REDO_COMMAND, undefined);
         }}
-        title={IS_APPLE ? 'Redo (⇧⌘Z)' : 'Redo (Ctrl+Y)'}
+        title={`Redo (${SHORTCUTS.REDO})`}
         type="button"
         className={buttonClassName}
         aria-label="Redo">
@@ -856,7 +880,7 @@ export default function ToolbarPlugin({
             className={
                 buttonClassName + ' ' + (toolbarState.isLowercase ? activeButtonClassName : '')
             }
-            title="Lowercase"
+            title={`Lowercase (${SHORTCUTS.LOWERCASE})`}
             aria-label="Format text to lowercase">
           <Alphabet size={24} className={'py-0.5 w-6'} />
         </button>
@@ -867,7 +891,7 @@ export default function ToolbarPlugin({
             className={
                 buttonClassName + ' ' + (toolbarState.isUppercase ? activeButtonClassName : '')
             }
-            title="Uppercase"
+            title={`Uppercase (${SHORTCUTS.UPPERCASE})`}
             aria-label="Format text to uppercase">
           <AlphabetUppercase size={24} className={'py-0.5 w-6'}/>
         </button>
@@ -878,7 +902,7 @@ export default function ToolbarPlugin({
             className={
                 buttonClassName + ' ' + (toolbarState.isCapitalize ? activeButtonClassName : '')
             }
-            title="Capitalize"
+            title={`Capitalize (${SHORTCUTS.CAPITALIZE})`}
             aria-label="Format text to capitalize">
           <Type size={24} />
         </button>
@@ -889,7 +913,7 @@ export default function ToolbarPlugin({
             className={
                 buttonClassName + ' ' + (toolbarState.isSubscript ? activeButtonClassName : '')
             }
-            title="Subscript"
+            title={`Subscript (${SHORTCUTS.SUBSCRIPT})`}
             aria-label="Format text with a subscript">
           <Subscript size={24} />
         </button>
@@ -900,7 +924,7 @@ export default function ToolbarPlugin({
             className={
                 buttonClassName + ' ' + (toolbarState.isSuperscript ? activeButtonClassName : '')
             }
-            title="Superscript"
+            title={`Superscript (${SHORTCUTS.SUPERSCRIPT})`}
             aria-label="Format text with a superscript">
           <Superscript size={24} />
         </button>
@@ -938,7 +962,7 @@ export default function ToolbarPlugin({
         <button
             onClick={() => clearFormatting(activeEditor)}
             className={buttonClassName}
-            title="Clear text formatting"
+            title={`Clear text formatting (${SHORTCUTS.CLEAR_FORMATTING})`}
             aria-label="Clear all text formatting">
           <Eraser size={24} />
         </button>

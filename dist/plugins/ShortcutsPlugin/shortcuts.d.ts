@@ -10,9 +10,12 @@ export declare const SHORTCUTS: Readonly<{
     HEADING1: "⌘+Opt+1" | "Ctrl+Alt+1";
     HEADING2: "⌘+Opt+2" | "Ctrl+Alt+2";
     HEADING3: "⌘+Opt+3" | "Ctrl+Alt+3";
-    BULLET_LIST: "⌘+Opt+4" | "Ctrl+Alt+4";
-    NUMBERED_LIST: "⌘+Opt+5" | "Ctrl+Alt+5";
-    CHECK_LIST: "⌘+Opt+6" | "Ctrl+Alt+6";
+    HEADING4: "⌘+Opt+4" | "Ctrl+Alt+4";
+    HEADING5: "⌘+Opt+5" | "Ctrl+Alt+5";
+    HEADING6: "⌘+Opt+6" | "Ctrl+Alt+6";
+    BULLET_LIST: "⌘+Opt+4" | "Ctrl+Alt+7";
+    NUMBERED_LIST: "⌘+Opt+5" | "Ctrl+Alt+8";
+    CHECK_LIST: "⌘+Opt+6" | "Ctrl+Alt+9";
     CODE_BLOCK: "⌘+Opt+C" | "Ctrl+Alt+C";
     QUOTE: "⌘+Opt+Q" | "Ctrl+Alt+Q";
     INCREASE_FONT_SIZE: "⌘+Shift+." | "Ctrl+Shift+.";
