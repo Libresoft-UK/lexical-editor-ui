@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-declare const _default: Record<"hasLinkAttributes" | "disableBeforeInput" | "emptyEditor" | "isAutocomplete" | "isCharLimit" | "isCharLimitUtf8" | "isMaxLength" | "isRichText" | "measureTypingPerf" | "selectionAlwaysOnDisplay" | "shouldAllowHighlightingWithBrackets" | "shouldPreserveNewLinesInMarkdown" | "shouldUseLexicalContextMenu" | "showNestedEditorTreeView" | "showTableOfContents" | "showTreeView" | "tableCellBackgroundColor" | "tableCellMerge" | "tableHorizontalScroll", boolean>;
+declare const _default: Record<"disableBeforeInput" | "emptyEditor" | "hasLinkAttributes" | "isAutocomplete" | "isCharLimit" | "isCharLimitUtf8" | "isMaxLength" | "isRichText" | "measureTypingPerf" | "selectionAlwaysOnDisplay" | "shouldAllowHighlightingWithBrackets" | "shouldPreserveNewLinesInMarkdown" | "shouldUseLexicalContextMenu" | "showNestedEditorTreeView" | "showTableOfContents" | "showTreeView" | "tableCellBackgroundColor" | "tableCellMerge" | "tableHorizontalScroll", boolean>;
 export default _default;

@@ -16,7 +16,6 @@ import DropdownColorPicker from '../../ui/DropdownColorPicker';
 import { getSelectedNode } from '../../utils/getSelectedNode';
 import { sanitizeUrl } from '../../utils/url';
 import { INSERT_IMAGE_COMMAND, InsertImageDialog, } from '../ImagesPlugin';
-import { InsertInlineImageDialog } from '../InlineImagePlugin';
 import { INSERT_PAGE_BREAK } from '../PageBreakPlugin';
 import { SHORTCUTS } from '../ShortcutsPlugin/shortcuts';
 import FontSize from './fontSize';
@@ -325,7 +324,5 @@ export default function ToolbarPlugin({ editor, activeEditor, setActiveEditor, s
                                     activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
                                 }, className: "item", children: [_jsx("i", { className: "icon page-break" }), _jsx("span", { className: "text", children: "Page Break" })] }), _jsxs(DropDownItem, { onClick: () => {
                                     showModal('Insert Image', (onClose) => (_jsx(InsertImageDialog, { activeEditor: activeEditor, onClose: onClose })));
-                                }, className: "item", children: [_jsx("i", { className: "icon image" }), _jsx("span", { className: "text", children: "Image" })] }), _jsxs(DropDownItem, { onClick: () => {
-                                    showModal('Insert Inline Image', (onClose) => (_jsx(InsertInlineImageDialog, { activeEditor: activeEditor, onClose: onClose })));
-                                }, className: "item", children: [_jsx("i", { className: "icon image" }), _jsx("span", { className: "text", children: "Inline Image" })] })] })] })), _jsx(Divider, {}), _jsx(ElementFormatDropdown, { disabled: !isEditable, value: toolbarState.elementFormat, editor: activeEditor, isRTL: toolbarState.isRTL }), modal] }));
+                                }, className: "item", children: [_jsx("i", { className: "icon image" }), _jsx("span", { className: "text", children: "Image" })] })] })] })), _jsx(Divider, {}), _jsx(ElementFormatDropdown, { disabled: !isEditable, value: toolbarState.elementFormat, editor: activeEditor, isRTL: toolbarState.isRTL }), modal] }));
 }

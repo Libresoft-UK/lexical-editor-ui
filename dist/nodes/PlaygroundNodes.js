@@ -16,7 +16,6 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { EmojiNode } from './EmojiNode';
 import { ImageNode } from './ImageNode';
-import { InlineImageNode } from './InlineImageNode/InlineImageNode';
 import { KeywordNode } from './KeywordNode';
 import { LayoutContainerNode } from './LayoutContainerNode';
 import { LayoutItemNode } from './LayoutItemNode';
@@ -37,7 +36,6 @@ const PlaygroundNodes = [
     LinkNode,
     OverflowNode,
     ImageNode,
-    InlineImageNode,
     EmojiNode,
     KeywordNode,
     HorizontalRuleNode,

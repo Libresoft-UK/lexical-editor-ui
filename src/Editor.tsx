@@ -30,7 +30,6 @@ import EmojiPickerPlugin from './plugins/EmojiPickerPlugin';
 import EmojisPlugin from './plugins/EmojisPlugin';
 import FloatingTextFormatToolbarPlugin from './plugins/FloatingTextFormatToolbarPlugin';
 import ImagesPlugin from './plugins/ImagesPlugin';
-import InlineImagePlugin from './plugins/InlineImagePlugin';
 import PageBreakPlugin from './plugins/PageBreakPlugin';
 import ShortcutsPlugin from './plugins/ShortcutsPlugin';
 import SpecialTextPlugin from './plugins/SpecialTextPlugin';
@@ -110,7 +109,6 @@ export default function Editor(): JSX.Element {
         />
         <ListPlugin />
         <ImagesPlugin />
-        <InlineImagePlugin />
         <HorizontalRulePlugin />
         <TabFocusPlugin />
         <TabIndentationPlugin maxIndent={7} />

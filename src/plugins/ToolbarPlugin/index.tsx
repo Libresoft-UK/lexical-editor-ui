@@ -69,7 +69,6 @@ import {
   InsertImageDialog,
   InsertImagePayload,
 } from '../ImagesPlugin';
-import {InsertInlineImageDialog} from '../InlineImagePlugin';
 import {INSERT_PAGE_BREAK} from '../PageBreakPlugin';
 import {SHORTCUTS} from '../ShortcutsPlugin/shortcuts';
 import FontSize from './fontSize';
@@ -1007,19 +1006,6 @@ export default function ToolbarPlugin({
                   className="item">
                   <i className="icon image" />
                   <span className="text">Image</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    showModal('Insert Inline Image', (onClose) => (
-                      <InsertInlineImageDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ));
-                  }}
-                  className="item">
-                  <i className="icon image" />
-                  <span className="text">Inline Image</span>
                 </DropDownItem>
               </DropDown>
             </>

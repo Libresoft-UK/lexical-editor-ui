@@ -1,19 +1,13 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import './InlineImageNode.css';
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
-import { LexicalNestedComposer } from '@lexical/react/LexicalNestedComposer';
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { useLexicalEditable } from '@lexical/react/useLexicalEditable';
 import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';
 import { mergeRegister } from '@lexical/utils';
 import { $getNodeByKey, $getSelection, $isNodeSelection, $setSelection, CLICK_COMMAND, COMMAND_PRIORITY_LOW, DRAGSTART_COMMAND, KEY_ENTER_COMMAND, KEY_ESCAPE_COMMAND, SELECTION_CHANGE_COMMAND, } from 'lexical';
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import useModal from '../../hooks/useModal';
-import LinkPlugin from '../../plugins/LinkPlugin';
 import Button from '../../ui/Button';
-import ContentEditable from '../../ui/ContentEditable';
 import { DialogActions } from '../../ui/Dialog';
 import Select from '../../ui/Select';
 import TextInput from '../../ui/TextInput';
@@ -153,9 +147,9 @@ export default function InlineImageComponent({ src, altText, nodeKey, width, hei
     ]);
     const draggable = isSelected && $isNodeSelection(selection);
     const isFocused = isSelected && isEditable;
-    return (_jsxs(Suspense, { fallback: null, children: [_jsxs(_Fragment, { children: [_jsxs("span", { draggable: draggable, children: [isEditable && (_jsx("button", { className: "image-edit-button", ref: buttonRef, onClick: () => {
-                                    showModal('Update Inline Image', (onClose) => (_jsx(UpdateInlineImageDialog, { activeEditor: editor, nodeKey: nodeKey, onClose: onClose })));
-                                }, children: "Edit" })), _jsx(LazyImage, { className: isFocused
-                                    ? `focused ${$isNodeSelection(selection) ? 'draggable' : ''}`
-                                    : null, src: src, altText: altText, imageRef: imageRef, width: width, height: height, position: position })] }), showCaption && (_jsx("span", { className: "image-caption-container", children: _jsxs(LexicalNestedComposer, { initialEditor: caption, children: [_jsx(AutoFocusPlugin, {}), _jsx(LinkPlugin, {}), _jsx(RichTextPlugin, { contentEditable: _jsx(ContentEditable, { placeholder: "Enter a caption...", placeholderClassName: "InlineImageNode__placeholder", className: "InlineImageNode__contentEditable" }), ErrorBoundary: LexicalErrorBoundary })] }) }))] }), modal] }));
+    return (_jsxs(Suspense, { fallback: null, children: [_jsx(_Fragment, { children: _jsxs("span", { draggable: draggable, children: [isEditable && (_jsx("button", { className: "image-edit-button", ref: buttonRef, onClick: () => {
+                                showModal('Update Inline Image', (onClose) => (_jsx(UpdateInlineImageDialog, { activeEditor: editor, nodeKey: nodeKey, onClose: onClose })));
+                            }, children: "Edit" })), _jsx(LazyImage, { className: isFocused
+                                ? `focused ${$isNodeSelection(selection) ? 'draggable' : ''}`
+                                : null, src: src, altText: altText, imageRef: imageRef, width: width, height: height, position: position })] }) }), modal] }));
 }
