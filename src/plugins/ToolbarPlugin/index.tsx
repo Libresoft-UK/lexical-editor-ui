@@ -81,24 +81,24 @@ import {
   formatQuote,
 } from './utils';
 import {
-  Alphabet,
-  AlphabetUppercase,
-  ArrowClockwise,
-  ArrowCounterclockwise,
-  Eraser,
-  Justify,
-  ListOl,
-  ListTask,
-  PaintBucket,
-  Quote,
-  Subscript,
-  Superscript, TextCenter, TextIndentLeft, TextIndentRight, TextLeft, TextParagraph, TextRight,
-  Type,
-  TypeBold,
-  TypeH1, TypeH2, TypeH3, TypeH4, TypeH5, TypeH6,
-  TypeItalic,
-  TypeStrikethrough,
-  TypeUnderline
+    Alphabet,
+    AlphabetUppercase,
+    ArrowClockwise,
+    ArrowCounterclockwise,
+    Eraser, FileBreak, Image,
+    Justify,
+    ListOl,
+    ListTask,
+    PaintBucket,
+    Quote, Scissors,
+    Subscript,
+    Superscript, TextCenter, TextIndentLeft, TextIndentRight, TextLeft, TextParagraph, TextRight,
+    Type,
+    TypeBold,
+    TypeH1, TypeH2, TypeH3, TypeH4, TypeH5, TypeH6,
+    TypeItalic,
+    TypeStrikethrough,
+    TypeUnderline
 } from "react-bootstrap-icons";
 
 const rootTypeToRootName = {
@@ -982,16 +982,18 @@ export default function ToolbarPlugin({
                       undefined,
                     );
                   }}
-                  className="item">
-                  <i className="icon horizontal-rule" />
+                  className="item"
+                  icon={<FileBreak size={20} />}
+                >
                   <span className="text">Horizontal Rule</span>
                 </DropDownItem>
                 <DropDownItem
                   onClick={() => {
                     activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
                   }}
-                  className="item">
-                  <i className="icon page-break" />
+                  className="item"
+                  icon={<Scissors size={20} />}
+                >
                   <span className="text">Page Break</span>
                 </DropDownItem>
                 <DropDownItem
@@ -1003,8 +1005,9 @@ export default function ToolbarPlugin({
                       />
                     ));
                   }}
-                  className="item">
-                  <i className="icon image" />
+                  className="item"
+                  icon={<Image size={20} />}
+                >
                   <span className="text">Image</span>
                 </DropDownItem>
               </DropDown>
