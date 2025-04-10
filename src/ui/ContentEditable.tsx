@@ -12,6 +12,7 @@ import './ContentEditable.css';
 
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import * as React from 'react';
+import {cn} from "../utils/joinClasses";
 
 type Props = {
   className?: string;
@@ -26,7 +27,7 @@ export default function LexicalContentEditable({
 }: Props): JSX.Element {
   return (
     <ContentEditable
-      className={className ?? 'border-0 text-base block relative outline-0 p-2 pb-12 lg:px-12 min-h-48  '}
+      className={cn('border-0 text-base block relative outline-0 p-2 pb-12 lg:px-12 min-h-48', className)}
       aria-placeholder={placeholder}
       placeholder={
         <div className={placeholderClassName ?? 'ContentEditable__placeholder'}>

@@ -36,10 +36,15 @@ import SpecialTextPlugin from './plugins/SpecialTextPlugin';
 import TabFocusPlugin from './plugins/TabFocusPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import ContentEditable from './ui/ContentEditable';
+import {cn} from "./utils/joinClasses";
 
+interface EditorProps {
+  classNames?: {
+    content?: string;
+  }
+}
 
-
-export default function Editor(): JSX.Element {
+export default function Editor({classNames}:EditorProps): JSX.Element {
   const {historyState} = useSharedHistoryContext();
 
   const isEditable = useLexicalEditable();
@@ -99,7 +104,7 @@ export default function Editor(): JSX.Element {
         <HistoryPlugin externalHistoryState={historyState} />
         <RichTextPlugin
           contentEditable={
-            <div className="editor-scroller">
+            <div className={cn("editor-scroller overflow-auto", classNames?.content)}>
               <div className="editor relative" ref={onRef}>
                 <ContentEditable placeholder={placeholder} />
               </div>

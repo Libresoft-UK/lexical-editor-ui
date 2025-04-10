@@ -104,7 +104,7 @@ function TextFormatFloatingToolbar({ editor, anchorElem, isLink, isBold, isItali
     }, [editor, $updateTextFormatFloatingToolbar]);
     const buttonClassName = 'cursor-pointer rounded hover:bg-default-900 hover:text-default-50';
     const activeButtonClassName = 'bg-default-500 text-default-50';
-    return (_jsx("div", { ref: popupCharStylesEditorRef, className: "absolute vertical-middle top-0 left-0 flex flex-row gap-1 p-1.5 rounded-md bg-default-100", children: editor.isEditable() && (_jsxs(_Fragment, { children: [_jsx("button", { type: "button", onClick: () => {
+    return (_jsx("div", { ref: popupCharStylesEditorRef, className: "absolute vertical-middle top-0 left-0 flex flex-row gap-1 p-1.5 rounded-md bg-default-50 shadow-md ", children: editor.isEditable() && (_jsxs(_Fragment, { children: [_jsx("button", { type: "button", onClick: () => {
                         editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
                     }, className: buttonClassName + ' ' + (isBold ? activeButtonClassName : ''), title: "Bold", "aria-label": "Format text as bold", children: _jsx(TypeBold, { size: 24 }) }), _jsx("button", { type: "button", onClick: () => {
                         editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');

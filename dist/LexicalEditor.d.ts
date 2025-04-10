@@ -10,6 +10,10 @@ interface LexicalEditorProps {
     src?: string | null;
     onChange?: (json: any, html: string) => void;
     debug?: boolean;
+    classNames?: {
+        wrapper?: string;
+        editor?: string;
+    };
 }
-export declare function LexicalEditor({ src, onChange, debug }: LexicalEditorProps): JSX.Element;
+export declare function LexicalEditor({ src, onChange, debug, classNames }: LexicalEditorProps): JSX.Element;
 export {};

@@ -201,7 +201,7 @@ function TextFormatFloatingToolbar({
   const activeButtonClassName = 'bg-default-500 text-default-50';
 
   return (
-    <div ref={popupCharStylesEditorRef} className="absolute vertical-middle top-0 left-0 flex flex-row gap-1 p-1.5 rounded-md bg-default-100">
+    <div ref={popupCharStylesEditorRef} className="absolute vertical-middle top-0 left-0 flex flex-row gap-1 p-1.5 rounded-md bg-default-50 shadow-md ">
       {editor.isEditable() && (
         <>
           <button

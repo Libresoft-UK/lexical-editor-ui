@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-export default function joinClasses(...args) {
-    return args.filter(Boolean).join(' ');
-}
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+export const cn = (...inputs) => {
+    return twMerge(clsx(inputs));
+};

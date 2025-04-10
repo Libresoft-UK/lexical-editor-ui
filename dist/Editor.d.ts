@@ -6,4 +6,10 @@
  *
  */
 import type { JSX } from 'react';
-export default function Editor(): JSX.Element;
+interface EditorProps {
+    classNames?: {
+        content?: string;
+    };
+}
+export default function Editor({ classNames }: EditorProps): JSX.Element;
+export {};

@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-export default function joinClasses(...args: Array<string | boolean | null | undefined>): string;
+import { ClassValue } from 'clsx';
+export declare const cn: (...inputs: ClassValue[]) => string;

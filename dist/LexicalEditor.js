@@ -23,6 +23,7 @@ import InitialiseValuePlugin from "./plugins/InitialiseValuePlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { $generateHtmlFromNodes } from '@lexical/html';
 import TreeViewPlugin from "./plugins/TreeViewPlugin";
+import { cn } from "./utils/joinClasses";
 function $prepopulatedRichText() {
     const root = $getRoot();
     if (root.getFirstChild() === null) {
@@ -109,7 +110,7 @@ function buildImportMap() {
     }
     return importMap;
 }
-export function LexicalEditor({ src = null, onChange, debug = false }) {
+export function LexicalEditor({ src = null, onChange, debug = false, classNames }) {
     const [editorState, setEditorState] = useState(src);
     const initialConfig = {
         editorState: null,
@@ -141,5 +142,5 @@ export function LexicalEditor({ src = null, onChange, debug = false }) {
         // Set the editor state to the JSON string
         setEditorState(jsonString);
     }
-    return (_jsxs(LexicalComposer, { initialConfig: initialConfig, children: [_jsx(SharedHistoryContext, { children: _jsxs(ToolbarContext, { children: [_jsx("div", { className: "bg-default-50 text-default-500 flex flex-col h-full rounded-md p-1 overflow-auto", children: _jsx(Editor, {}) }), debug && _jsx(TreeViewPlugin, {})] }) }), _jsx(InitialiseValuePlugin, { src: src }), _jsx(OnChangePlugin, { onChange: handleOnChange, ignoreSelectionChange: true })] }));
+    return (_jsxs(LexicalComposer, { initialConfig: initialConfig, children: [_jsx(SharedHistoryContext, { children: _jsxs(ToolbarContext, { children: [_jsx("div", { className: cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper), children: _jsx(Editor, { classNames: { content: classNames?.editor } }) }), debug && _jsx(TreeViewPlugin, {})] }) }), _jsx(InitialiseValuePlugin, { src: src }), _jsx(OnChangePlugin, { onChange: handleOnChange, ignoreSelectionChange: true })] }));
 }

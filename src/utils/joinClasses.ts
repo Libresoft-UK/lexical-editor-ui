@@ -6,8 +6,9 @@
  *
  */
 
-export default function joinClasses(
-  ...args: Array<string | boolean | null | undefined>
-) {
-  return args.filter(Boolean).join(' ');
+import { ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export const cn = (...inputs: ClassValue[]) => {
+    return twMerge(clsx(inputs))
 }

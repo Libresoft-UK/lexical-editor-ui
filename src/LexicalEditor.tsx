@@ -34,6 +34,7 @@ import {OnChangePlugin} from "@lexical/react/LexicalOnChangePlugin";
 import * as React from "react";
 import { $generateHtmlFromNodes } from '@lexical/html';
 import TreeViewPlugin from "./plugins/TreeViewPlugin";
+import {cn} from "./utils/joinClasses";
 
 function $prepopulatedRichText() {
   const root = $getRoot();
@@ -184,9 +185,13 @@ interface LexicalEditorProps {
   src?: string | null;
   onChange?: (json: any, html: string) => void;
   debug?: boolean;
+  classNames?: {
+    wrapper?: string;
+    editor?: string;
+  }
 }
 
-export function LexicalEditor({src = null, onChange, debug = false}:LexicalEditorProps): JSX.Element {
+export function LexicalEditor({src = null, onChange, debug = false, classNames}:LexicalEditorProps): JSX.Element {
 
   const [editorState, setEditorState] = useState<string | null>(src);
 
@@ -228,8 +233,8 @@ export function LexicalEditor({src = null, onChange, debug = false}:LexicalEdito
     <LexicalComposer initialConfig={initialConfig}>
       <SharedHistoryContext>
         <ToolbarContext>
-          <div className="bg-default-50 text-default-500 flex flex-col h-full rounded-md p-1 overflow-auto">
-            <Editor />
+          <div className={cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper)}>
+            <Editor classNames={{content: classNames?.editor}}/>
           </div>
           {debug && <TreeViewPlugin/>}
           {/*{isDevPlayground ? <DocsPlugin /> : null}*/}

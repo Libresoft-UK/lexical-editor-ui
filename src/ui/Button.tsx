@@ -13,7 +13,7 @@ import './Button.css';
 import * as React from 'react';
 import {ReactNode} from 'react';
 
-import joinClasses from '../utils/joinClasses';
+import {cn} from '../utils/joinClasses';
 
 export default function Button({
   'data-test-id': dataTestId,
@@ -35,7 +35,7 @@ export default function Button({
   return (
     <button
       disabled={disabled}
-      className={joinClasses(
+      className={cn(
         'bg-primary-500 text-white rounded-md px-2 py-1 hover:bg-primary-600 disabled:opacity-50 disabled:pointer-events-none',
         disabled && 'Button__disabled',
         small && 'Button__small',

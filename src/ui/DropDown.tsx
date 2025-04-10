@@ -149,7 +149,7 @@ function DropDownItems({
 
   return (
     <DropDownContext.Provider value={contextValue}>
-      <div className="fixed right-0 mt-2 w-56 origin-top-right rounded-md bg-default-100 ring-1 shadow-lg ring-black/5 focus:outline-hidden flex flex-col gap-0.5 p-2 z-50" ref={dropDownRef} onKeyDown={handleKeyDown}>
+      <div className="fixed right-0 mt-2 w-56 origin-top-right rounded-md bg-default-50 shadow-md focus:outline-hidden flex flex-col gap-0.5 p-2 z-50" ref={dropDownRef} onKeyDown={handleKeyDown}>
         {children}
       </div>
     </DropDownContext.Provider>

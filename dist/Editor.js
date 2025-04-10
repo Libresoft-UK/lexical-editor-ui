@@ -25,7 +25,8 @@ import SpecialTextPlugin from './plugins/SpecialTextPlugin';
 import TabFocusPlugin from './plugins/TabFocusPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import ContentEditable from './ui/ContentEditable';
-export default function Editor() {
+import { cn } from "./utils/joinClasses";
+export default function Editor({ classNames }) {
     const { historyState } = useSharedHistoryContext();
     const isEditable = useLexicalEditable();
     const placeholder = 'Enter some rich text...';
@@ -52,5 +53,5 @@ export default function Editor() {
             window.removeEventListener('resize', updateViewPortWidth);
         };
     }, [isSmallWidthViewport]);
-    return (_jsxs(_Fragment, { children: [_jsx(ToolbarPlugin, { editor: editor, activeEditor: activeEditor, setActiveEditor: setActiveEditor, setIsLinkEditMode: setIsLinkEditMode }), _jsx(ShortcutsPlugin, { editor: activeEditor, setIsLinkEditMode: setIsLinkEditMode }), _jsxs("div", { className: `editor-container tree-view`, children: [_jsx(DragDropPaste, {}), _jsx(AutoFocusPlugin, {}), _jsx(SelectionAlwaysOnDisplay, {}), _jsx(ClearEditorPlugin, {}), _jsx(EmojiPickerPlugin, {}), _jsx(EmojisPlugin, {}), _jsx(HistoryPlugin, { externalHistoryState: historyState }), _jsx(RichTextPlugin, { contentEditable: _jsx("div", { className: "editor-scroller", children: _jsx("div", { className: "editor relative", ref: onRef, children: _jsx(ContentEditable, { placeholder: placeholder }) }) }), ErrorBoundary: LexicalErrorBoundary }), _jsx(ListPlugin, {}), _jsx(ImagesPlugin, {}), _jsx(HorizontalRulePlugin, {}), _jsx(TabFocusPlugin, {}), _jsx(TabIndentationPlugin, { maxIndent: 7 }), _jsx(PageBreakPlugin, {}), floatingAnchorElem && !isSmallWidthViewport && (_jsxs(_Fragment, { children: [_jsx(DraggableBlockPlugin, { anchorElem: floatingAnchorElem }), _jsx(FloatingTextFormatToolbarPlugin, { anchorElem: floatingAnchorElem, setIsLinkEditMode: setIsLinkEditMode })] })), _jsx(SpecialTextPlugin, {})] })] }));
+    return (_jsxs(_Fragment, { children: [_jsx(ToolbarPlugin, { editor: editor, activeEditor: activeEditor, setActiveEditor: setActiveEditor, setIsLinkEditMode: setIsLinkEditMode }), _jsx(ShortcutsPlugin, { editor: activeEditor, setIsLinkEditMode: setIsLinkEditMode }), _jsxs("div", { className: `editor-container tree-view`, children: [_jsx(DragDropPaste, {}), _jsx(AutoFocusPlugin, {}), _jsx(SelectionAlwaysOnDisplay, {}), _jsx(ClearEditorPlugin, {}), _jsx(EmojiPickerPlugin, {}), _jsx(EmojisPlugin, {}), _jsx(HistoryPlugin, { externalHistoryState: historyState }), _jsx(RichTextPlugin, { contentEditable: _jsx("div", { className: cn("editor-scroller overflow-auto", classNames?.content), children: _jsx("div", { className: "editor relative", ref: onRef, children: _jsx(ContentEditable, { placeholder: placeholder }) }) }), ErrorBoundary: LexicalErrorBoundary }), _jsx(ListPlugin, {}), _jsx(ImagesPlugin, {}), _jsx(HorizontalRulePlugin, {}), _jsx(TabFocusPlugin, {}), _jsx(TabIndentationPlugin, { maxIndent: 7 }), _jsx(PageBreakPlugin, {}), floatingAnchorElem && !isSmallWidthViewport && (_jsxs(_Fragment, { children: [_jsx(DraggableBlockPlugin, { anchorElem: floatingAnchorElem }), _jsx(FloatingTextFormatToolbarPlugin, { anchorElem: floatingAnchorElem, setIsLinkEditMode: setIsLinkEditMode })] })), _jsx(SpecialTextPlugin, {})] })] }));
 }
