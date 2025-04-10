@@ -26,7 +26,7 @@ export default function LexicalContentEditable({
 }: Props): JSX.Element {
   return (
     <ContentEditable
-      className={className ?? 'ContentEditable__root'}
+      className={className ?? 'border-0 text-base block relative outline-0 p-2 pb-12 lg:px-12 min-h-48  '}
       aria-placeholder={placeholder}
       placeholder={
         <div className={placeholderClassName ?? 'ContentEditable__placeholder'}>

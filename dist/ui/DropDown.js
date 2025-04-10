@@ -65,7 +65,7 @@ function DropDownItems({ children, dropDownRef, onClose, }) {
             highlightedItem.current.focus();
         }
     }, [items, highlightedItem]);
-    return (_jsx(DropDownContext.Provider, { value: contextValue, children: _jsx("div", { className: "absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-default-100 ring-1 shadow-lg ring-black/5 focus:outline-hidden flex flex-col gap-0.5 p-2", ref: dropDownRef, onKeyDown: handleKeyDown, children: children }) }));
+    return (_jsx(DropDownContext.Provider, { value: contextValue, children: _jsx("div", { className: "fixed right-0 mt-2 w-56 origin-top-right rounded-md bg-default-100 ring-1 shadow-lg ring-black/5 focus:outline-hidden flex flex-col gap-0.5 p-2 z-50", ref: dropDownRef, onKeyDown: handleKeyDown, children: children }) }));
 }
 export default function DropDown({ disabled = false, buttonLabel, buttonAriaLabel, buttonClassName, buttonIconClassName, buttonElement, children, stopCloseOnClickSelf, }) {
     const dropDownRef = useRef(null);
