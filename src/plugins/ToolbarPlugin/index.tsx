@@ -752,7 +752,7 @@ export default function ToolbarPlugin({
   const activeButtonClassName = 'bg-default-500 text-default-50';
 
   return (
-      <div className="flex flex-row h-12 gap-2 p-1 overflow-auto">
+      <div className="flex flex-row h-12 gap-2 p-1 overflow-y-auto">
       <button
         disabled={!toolbarState.canUndo || !isEditable}
         onClick={() => {
@@ -880,7 +880,9 @@ export default function ToolbarPlugin({
                 buttonClassName + ' ' + (toolbarState.isLowercase ? activeButtonClassName : '')
             }
             title={`Lowercase (${SHORTCUTS.LOWERCASE})`}
-            aria-label="Format text to lowercase">
+            aria-label="Format text to lowercase"
+            type="button"
+        >
           <Alphabet size={24} className={'py-0.5 w-6'} />
         </button>
         <button
@@ -891,7 +893,9 @@ export default function ToolbarPlugin({
                 buttonClassName + ' ' + (toolbarState.isUppercase ? activeButtonClassName : '')
             }
             title={`Uppercase (${SHORTCUTS.UPPERCASE})`}
-            aria-label="Format text to uppercase">
+            aria-label="Format text to uppercase"
+            type="button"
+        >
           <AlphabetUppercase size={24} className={'py-0.5 w-6'}/>
         </button>
         <button
@@ -902,7 +906,9 @@ export default function ToolbarPlugin({
                 buttonClassName + ' ' + (toolbarState.isCapitalize ? activeButtonClassName : '')
             }
             title={`Capitalize (${SHORTCUTS.CAPITALIZE})`}
-            aria-label="Format text to capitalize">
+            aria-label="Format text to capitalize"
+            type="button"
+        >
           <Type size={24} />
         </button>
         <button
@@ -913,7 +919,9 @@ export default function ToolbarPlugin({
                 buttonClassName + ' ' + (toolbarState.isSubscript ? activeButtonClassName : '')
             }
             title={`Subscript (${SHORTCUTS.SUBSCRIPT})`}
-            aria-label="Format text with a subscript">
+            aria-label="Format text with a subscript"
+            type="button"
+        >
           <Subscript size={24} />
         </button>
         <button
@@ -924,7 +932,9 @@ export default function ToolbarPlugin({
                 buttonClassName + ' ' + (toolbarState.isSuperscript ? activeButtonClassName : '')
             }
             title={`Superscript (${SHORTCUTS.SUPERSCRIPT})`}
-            aria-label="Format text with a superscript">
+            aria-label="Format text with a superscript"
+            type="button"
+        >
           <Superscript size={24} />
         </button>
         {/*<button*/}
@@ -945,6 +955,7 @@ export default function ToolbarPlugin({
             onClick={() => formatBulletList(editor, toolbarState.blockType)}
             title={`Bullet List (${SHORTCUTS.BULLET_LIST})`}
             aria-label={`Format text as bullet list. Shortcut: ${SHORTCUTS.BULLET_LIST}`}
+            type="button"
         >
           <ListTask size={24} />
         </button>
@@ -955,6 +966,7 @@ export default function ToolbarPlugin({
             onClick={() => formatNumberedList(editor, toolbarState.blockType)}
             title={`Numbered List (${SHORTCUTS.NUMBERED_LIST})`}
             aria-label={`Format text as numbered list. Shortcut: ${SHORTCUTS.NUMBERED_LIST}`}
+            type="button"
         >
           <ListOl size={24} />
         </button>
@@ -962,7 +974,9 @@ export default function ToolbarPlugin({
             onClick={() => clearFormatting(activeEditor)}
             className={buttonClassName}
             title={`Clear text formatting (${SHORTCUTS.CLEAR_FORMATTING})`}
-            aria-label="Clear all text formatting">
+            aria-label="Clear all text formatting"
+            type="button"
+        >
           <Eraser size={24} />
         </button>
 
