@@ -37,6 +37,8 @@ import TabFocusPlugin from './plugins/TabFocusPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import ContentEditable from './ui/ContentEditable';
 import {cn} from "./utils/joinClasses";
+import KeywordsPlugin from "./plugins/KeywordsPlugin";
+import DynamicContentsPlugin from "./plugins/DynamicContentPlugin";
 
 interface EditorProps {
   classNames?: {
@@ -128,6 +130,8 @@ export default function Editor({classNames}:EditorProps): JSX.Element {
           </>
         )}
         <SpecialTextPlugin />
+        <KeywordsPlugin />
+        <DynamicContentsPlugin />
       </div>
     </>
   );

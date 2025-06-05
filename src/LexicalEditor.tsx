@@ -35,6 +35,7 @@ import * as React from "react";
 import { $generateHtmlFromNodes } from '@lexical/html';
 import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import {cn} from "./utils/joinClasses";
+import {DynamicContentProvider} from "./context/DynamicContentContext";
 
 function $prepopulatedRichText() {
   const root = $getRoot();
@@ -232,14 +233,16 @@ export function LexicalEditor({src = null, onChange, debug = false, classNames}:
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <SharedHistoryContext>
-        <ToolbarContext>
-          <div className={cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper)}>
-            <Editor classNames={{content: classNames?.editor}}/>
-          </div>
-          {debug && <TreeViewPlugin/>}
-          {/*{isDevPlayground ? <DocsPlugin /> : null}*/}
-          {/*{isDevPlayground ? <PasteLogPlugin /> : null}*/}
-        </ToolbarContext>
+        <DynamicContentProvider options={[]} >
+          <ToolbarContext>
+            <div className={cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper)}>
+              <Editor classNames={{content: classNames?.editor}}/>
+            </div>
+            {debug && <TreeViewPlugin/>}
+            {/*{isDevPlayground ? <DocsPlugin /> : null}*/}
+            {/*{isDevPlayground ? <PasteLogPlugin /> : null}*/}
+          </ToolbarContext>
+        </DynamicContentProvider>
       </SharedHistoryContext>
       <InitialiseValuePlugin src={src} />
       <OnChangePlugin onChange={handleOnChange} ignoreSelectionChange={true} />

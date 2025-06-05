@@ -25,6 +25,7 @@ import {LayoutContainerNode} from './LayoutContainerNode';
 import {LayoutItemNode} from './LayoutItemNode';
 import {PageBreakNode} from './PageBreakNode';
 import {SpecialTextNode} from './SpecialTextNode';
+import {DynamicContentNode} from "./DynamicContentNode";
 
 const PlaygroundNodes: Array<Klass<LexicalNode>> = [
   HeadingNode,
@@ -49,6 +50,7 @@ const PlaygroundNodes: Array<Klass<LexicalNode>> = [
   LayoutContainerNode,
   LayoutItemNode,
   SpecialTextNode,
+  DynamicContentNode,
 ];
 
 export default PlaygroundNodes;

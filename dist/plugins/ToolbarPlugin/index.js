@@ -324,5 +324,7 @@ export default function ToolbarPlugin({ editor, activeEditor, setActiveEditor, s
                                     activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
                                 }, className: "item", icon: _jsx(Scissors, { size: 20 }), children: _jsx("span", { className: "text", children: "Page Break" }) }), _jsx(DropDownItem, { onClick: () => {
                                     showModal('Insert Image', (onClose) => (_jsx(InsertImageDialog, { activeEditor: activeEditor, onClose: onClose })));
-                                }, className: "item", icon: _jsx(Image, { size: 20 }), children: _jsx("span", { className: "text", children: "Image" }) })] })] })), _jsx(Divider, {}), _jsx(ElementFormatDropdown, { disabled: !isEditable, value: toolbarState.elementFormat, editor: activeEditor, isRTL: toolbarState.isRTL }), modal] }));
+                                }, className: "item", icon: _jsx(Image, { size: 20 }), children: _jsx("span", { className: "text", children: "Image" }) }), _jsx(DropDownItem, { onClick: () => {
+                                    showModal('Insert Dynamic Content', (onClose) => (_jsx(InsertImageDialog, { activeEditor: activeEditor, onClose: onClose })));
+                                }, className: "item", icon: _jsx(Image, { size: 20 }), children: _jsx("span", { className: "text", children: "Dynamic Content" }) })] })] })), _jsx(Divider, {}), _jsx(ElementFormatDropdown, { disabled: !isEditable, value: toolbarState.elementFormat, editor: activeEditor, isRTL: toolbarState.isRTL }), modal] }));
 }

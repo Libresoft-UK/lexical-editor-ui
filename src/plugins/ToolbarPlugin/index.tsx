@@ -1024,6 +1024,20 @@ export default function ToolbarPlugin({
                 >
                   <span className="text">Image</span>
                 </DropDownItem>
+                <DropDownItem
+                    onClick={() => {
+                        showModal('Insert Dynamic Content', (onClose) => (
+                        <InsertImageDialog
+                            activeEditor={activeEditor}
+                            onClose={onClose}
+                        />
+                        ));
+                    }}
+                    className="item"
+                    icon={<Image size={20} />}
+                >
+                    <span className="text">Dynamic Content</span>
+                </DropDownItem>
               </DropDown>
             </>
           )}
