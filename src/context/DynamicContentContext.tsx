@@ -15,7 +15,7 @@ export type DCOption = {
     options?: DCOption[];
 }
 
-type DCContextType = {
+export type DCContextType = {
     /**
      * An array of dynamic content options
      */
@@ -23,31 +23,14 @@ type DCContextType = {
     /**
      * Function to get dynamic content by slug
      */
-    getDynamicContentBySlug: (slug: string) => string | undefined;
+    getDynamicContentBySlug: (slug: string) => string;
 }
 
 const defaultContext: DCContextType = {
-    options: [
-        {
-            label: 'Test',
-            slug: 'test',
-            options: [
-                {
-                    label: 'Test Option',
-                    slug: 'test',
-                    options: [
-                        {
-                            label: 'Nested Test Option',
-                            slug: 'nestedTestOption'
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
+    options: [],
     getDynamicContentBySlug: (slug: string) => {
         console.warn('DynamicContentProvider not initialized, returning undefined for slug:', slug);
-        return undefined;
+        return '';
     }
 }
 
@@ -58,28 +41,30 @@ const DynamicContentContext = createContext<DCContextType>(defaultContext);
 
 export const DynamicContentProvider: React.FC<{ children: React.ReactNode; options?: DCOption[] }> = ({ children, options = [] }) => {
 
-    function getDynamicContentBySlug(slug: string): string | undefined {
+    function getDynamicContentBySlug(slug: string): string  {
 
         // remove any curly braces from the slug, e.g. "{{visit.visitor.firstName}}" becomes "visit.visitor.firstName"
         slug = slug.replace(/{{|}}/g, '').trim();
 
         // find the dynamic content option by slug, eg "visit.visitor.firstName" should return "Visit Visitor First Name" based on each option's label
         const findOption = (options: DCOption[], slugParts: string[]): string | undefined => {
+            let label = '';
             for (const option of options) {
                 if (option.slug === slugParts[0]) {
+                    label = option.label;
                     if (slugParts.length === 1) {
-                        return option.label;
+                        return label;
                     }
                     if (option.options) {
-                        return findOption(option.options, slugParts.slice(1));
+                        const nestedLabel = findOption(option.options, slugParts.slice(1));
+                        return nestedLabel ? `${label} ${nestedLabel}` : label;
                     }
                 }
             }
-            return undefined;
         };
         const slugParts = slug.split('.');
         const result = findOption(options, slugParts);
-        return result ? result : undefined;
+        return result ? result : 'Invalid Dynamic Content';
     }
 
     const contextValue: DCContextType = {

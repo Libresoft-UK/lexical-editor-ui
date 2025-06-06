@@ -35,7 +35,7 @@ import * as React from "react";
 import { $generateHtmlFromNodes } from '@lexical/html';
 import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import {cn} from "./utils/joinClasses";
-import {DynamicContentProvider} from "./context/DynamicContentContext";
+import {DCOption, DynamicContentProvider} from "./context/DynamicContentContext";
 
 function $prepopulatedRichText() {
   const root = $getRoot();
@@ -189,10 +189,11 @@ interface LexicalEditorProps {
   classNames?: {
     wrapper?: string;
     editor?: string;
-  }
+  };
+  dynamicContentOptions?: DCOption[];
 }
 
-export function LexicalEditor({src = null, onChange, debug = false, classNames}:LexicalEditorProps): JSX.Element {
+export function LexicalEditor({src = null, onChange, debug = false, classNames, dynamicContentOptions = []}:LexicalEditorProps): JSX.Element {
 
   const [editorState, setEditorState] = useState<string | null>(src);
 
@@ -233,7 +234,7 @@ export function LexicalEditor({src = null, onChange, debug = false, classNames}:
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <SharedHistoryContext>
-        <DynamicContentProvider options={[]} >
+        <DynamicContentProvider options={dynamicContentOptions} >
           <ToolbarContext>
             <div className={cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper)}>
               <Editor classNames={{content: classNames?.editor}}/>

@@ -12,7 +12,7 @@ export type DCOption = {
      */
     options?: DCOption[];
 };
-type DCContextType = {
+export type DCContextType = {
     /**
      * An array of dynamic content options
      */
@@ -20,7 +20,7 @@ type DCContextType = {
     /**
      * Function to get dynamic content by slug
      */
-    getDynamicContentBySlug: (slug: string) => string | undefined;
+    getDynamicContentBySlug: (slug: string) => string;
 };
 import React from 'react';
 export declare const DynamicContentProvider: React.FC<{
@@ -28,4 +28,3 @@ export declare const DynamicContentProvider: React.FC<{
     options?: DCOption[];
 }>;
 export declare const useDynamicContent: () => DCContextType;
-export {};

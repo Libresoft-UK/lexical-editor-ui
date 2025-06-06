@@ -1,26 +1,9 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 const defaultContext = {
-    options: [
-        {
-            label: 'Test',
-            slug: 'test',
-            options: [
-                {
-                    label: 'Test Option',
-                    slug: 'test',
-                    options: [
-                        {
-                            label: 'Nested Test Option',
-                            slug: 'nestedTestOption'
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
+    options: [],
     getDynamicContentBySlug: (slug) => {
         console.warn('DynamicContentProvider not initialized, returning undefined for slug:', slug);
-        return undefined;
+        return '';
     }
 };
 import { createContext, useContext } from 'react';
@@ -31,21 +14,23 @@ export const DynamicContentProvider = ({ children, options = [] }) => {
         slug = slug.replace(/{{|}}/g, '').trim();
         // find the dynamic content option by slug, eg "visit.visitor.firstName" should return "Visit Visitor First Name" based on each option's label
         const findOption = (options, slugParts) => {
+            let label = '';
             for (const option of options) {
                 if (option.slug === slugParts[0]) {
+                    label = option.label;
                     if (slugParts.length === 1) {
-                        return option.label;
+                        return label;
                     }
                     if (option.options) {
-                        return findOption(option.options, slugParts.slice(1));
+                        const nestedLabel = findOption(option.options, slugParts.slice(1));
+                        return nestedLabel ? `${label} ${nestedLabel}` : label;
                     }
                 }
             }
-            return undefined;
         };
         const slugParts = slug.split('.');
         const result = findOption(options, slugParts);
-        return result ? result : undefined;
+        return result ? result : 'Invalid Dynamic Content';
     }
     const contextValue = {
         options,

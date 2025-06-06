@@ -111,7 +111,7 @@ function buildImportMap() {
     }
     return importMap;
 }
-export function LexicalEditor({ src = null, onChange, debug = false, classNames }) {
+export function LexicalEditor({ src = null, onChange, debug = false, classNames, dynamicContentOptions = [] }) {
     const [editorState, setEditorState] = useState(src);
     const initialConfig = {
         editorState: null,
@@ -143,5 +143,5 @@ export function LexicalEditor({ src = null, onChange, debug = false, classNames 
         // Set the editor state to the JSON string
         setEditorState(jsonString);
     }
-    return (_jsxs(LexicalComposer, { initialConfig: initialConfig, children: [_jsx(SharedHistoryContext, { children: _jsx(DynamicContentProvider, { options: [], children: _jsxs(ToolbarContext, { children: [_jsx("div", { className: cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper), children: _jsx(Editor, { classNames: { content: classNames?.editor } }) }), debug && _jsx(TreeViewPlugin, {})] }) }) }), _jsx(InitialiseValuePlugin, { src: src }), _jsx(OnChangePlugin, { onChange: handleOnChange, ignoreSelectionChange: true })] }));
+    return (_jsxs(LexicalComposer, { initialConfig: initialConfig, children: [_jsx(SharedHistoryContext, { children: _jsx(DynamicContentProvider, { options: dynamicContentOptions, children: _jsxs(ToolbarContext, { children: [_jsx("div", { className: cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper), children: _jsx(Editor, { classNames: { content: classNames?.editor } }) }), debug && _jsx(TreeViewPlugin, {})] }) }) }), _jsx(InitialiseValuePlugin, { src: src }), _jsx(OnChangePlugin, { onChange: handleOnChange, ignoreSelectionChange: true })] }));
 }

@@ -100,6 +100,7 @@ import {
     TypeStrikethrough,
     TypeUnderline
 } from "react-bootstrap-icons";
+import {InsertDynamicContentDialog} from "../DynamicContentPlugin";
 
 const rootTypeToRootName = {
   root: 'Root',
@@ -1027,14 +1028,14 @@ export default function ToolbarPlugin({
                 <DropDownItem
                     onClick={() => {
                         showModal('Insert Dynamic Content', (onClose) => (
-                        <InsertImageDialog
+                        <InsertDynamicContentDialog
                             activeEditor={activeEditor}
                             onClose={onClose}
                         />
                         ));
                     }}
                     className="item"
-                    icon={<Image size={20} />}
+                    icon={<span className={'text-2xl leading-none'}>➲</span>}
                 >
                     <span className="text">Dynamic Content</span>
                 </DropDownItem>

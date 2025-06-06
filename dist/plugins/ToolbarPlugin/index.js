@@ -21,6 +21,7 @@ import { SHORTCUTS } from '../ShortcutsPlugin/shortcuts';
 import FontSize from './fontSize';
 import { clearFormatting, formatBulletList, formatHeading, formatNumberedList, formatParagraph, formatQuote, } from './utils';
 import { Alphabet, AlphabetUppercase, ArrowClockwise, ArrowCounterclockwise, Eraser, FileBreak, Image, Justify, ListOl, ListTask, PaintBucket, Quote, Scissors, Subscript, Superscript, TextCenter, TextIndentLeft, TextIndentRight, TextLeft, TextParagraph, TextRight, Type, TypeBold, TypeH1, TypeH2, TypeH3, TypeH4, TypeH5, TypeH6, TypeItalic, TypeStrikethrough, TypeUnderline } from "react-bootstrap-icons";
+import { InsertDynamicContentDialog } from "../DynamicContentPlugin";
 const rootTypeToRootName = {
     root: 'Root',
     table: 'Table',
@@ -325,6 +326,6 @@ export default function ToolbarPlugin({ editor, activeEditor, setActiveEditor, s
                                 }, className: "item", icon: _jsx(Scissors, { size: 20 }), children: _jsx("span", { className: "text", children: "Page Break" }) }), _jsx(DropDownItem, { onClick: () => {
                                     showModal('Insert Image', (onClose) => (_jsx(InsertImageDialog, { activeEditor: activeEditor, onClose: onClose })));
                                 }, className: "item", icon: _jsx(Image, { size: 20 }), children: _jsx("span", { className: "text", children: "Image" }) }), _jsx(DropDownItem, { onClick: () => {
-                                    showModal('Insert Dynamic Content', (onClose) => (_jsx(InsertImageDialog, { activeEditor: activeEditor, onClose: onClose })));
-                                }, className: "item", icon: _jsx(Image, { size: 20 }), children: _jsx("span", { className: "text", children: "Dynamic Content" }) })] })] })), _jsx(Divider, {}), _jsx(ElementFormatDropdown, { disabled: !isEditable, value: toolbarState.elementFormat, editor: activeEditor, isRTL: toolbarState.isRTL }), modal] }));
+                                    showModal('Insert Dynamic Content', (onClose) => (_jsx(InsertDynamicContentDialog, { activeEditor: activeEditor, onClose: onClose })));
+                                }, className: "item", icon: _jsx("span", { className: 'text-2xl leading-none', children: "\u27B2" }), children: _jsx("span", { className: "text", children: "Dynamic Content" }) })] })] })), _jsx(Divider, {}), _jsx(ElementFormatDropdown, { disabled: !isEditable, value: toolbarState.elementFormat, editor: activeEditor, isRTL: toolbarState.isRTL }), modal] }));
 }

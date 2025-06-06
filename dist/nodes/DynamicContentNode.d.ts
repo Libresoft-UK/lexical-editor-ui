@@ -1,12 +1,25 @@
-import type { EditorConfig, LexicalNode, SerializedTextNode, DOMExportOutput } from 'lexical';
-import { TextNode } from 'lexical';
-export type SerializedDynamicContentNode = SerializedTextNode;
+import type { EditorConfig, LexicalNode, SerializedTextNode, SerializedLexicalNode, DOMExportOutput, NodeKey } from 'lexical';
+import { TextNode, LexicalUpdateJSON } from 'lexical';
+interface serializedDynamicContentNode extends SerializedTextNode {
+    label?: string;
+}
+export interface DynamicContentPayload {
+    text: string;
+    label: string;
+    key?: NodeKey;
+}
 export declare class DynamicContentNode extends TextNode {
+    __label: string;
+    constructor(text?: string, label?: string, key?: NodeKey);
     static getType(): string;
+    setLabel(label: string): this;
+    getLabel(): string;
     static clone(node: DynamicContentNode): DynamicContentNode;
-    static importJSON(serializedNode: SerializedDynamicContentNode): DynamicContentNode;
+    static importJSON(serializedNode: SerializedLexicalNode): DynamicContentNode;
+    updateFromJSON(serializedNode: LexicalUpdateJSON<serializedDynamicContentNode>): this;
+    exportJSON(): serializedDynamicContentNode;
     createDOM(config: EditorConfig): HTMLElement;
-    updateDOM(prevNode: DynamicContentNode, dom: HTMLElement, config: EditorConfig): boolean;
+    updateDOM(prevNode: this, dom: HTMLElement, config: EditorConfig): boolean;
     exportDOM(): DOMExportOutput;
     canInsertTextBefore(): boolean;
     canInsertTextAfter(): boolean;
@@ -16,5 +29,6 @@ export declare class DynamicContentNode extends TextNode {
     isInline(): true;
     getMode(): 'segmented' | 'token';
 }
-export declare function $createDynamicContentNode(dynamicContent?: string): DynamicContentNode;
-export declare function $isDynamicContentNode(node: LexicalNode | null | undefined): boolean;
+export declare function $createDynamicContentNode({ text, label }: DynamicContentPayload): DynamicContentNode;
+export declare function $isDynamicContentNode(node: LexicalNode | null | undefined): node is DynamicContentNode;
+export {};
