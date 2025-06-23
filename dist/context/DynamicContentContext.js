@@ -1,5 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 const defaultContext = {
+    hasDynamicContent: false,
     options: [],
     getDynamicContentBySlug: (slug) => {
         console.warn('DynamicContentProvider not initialized, returning undefined for slug:', slug);
@@ -33,6 +34,7 @@ export const DynamicContentProvider = ({ children, options = [] }) => {
         return result ? result : 'Invalid Dynamic Content';
     }
     const contextValue = {
+        hasDynamicContent: options.length > 0,
         options,
         getDynamicContentBySlug
     };

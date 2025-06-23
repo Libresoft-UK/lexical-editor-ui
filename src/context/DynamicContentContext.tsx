@@ -17,6 +17,10 @@ export type DCOption = {
 
 export type DCContextType = {
     /**
+     * Boolean indicating if the dynamic content has any options
+     */
+    hasDynamicContent: boolean;
+    /**
      * An array of dynamic content options
      */
     options: DCOption[];
@@ -27,6 +31,7 @@ export type DCContextType = {
 }
 
 const defaultContext: DCContextType = {
+    hasDynamicContent: false,
     options: [],
     getDynamicContentBySlug: (slug: string) => {
         console.warn('DynamicContentProvider not initialized, returning undefined for slug:', slug);
@@ -68,6 +73,7 @@ export const DynamicContentProvider: React.FC<{ children: React.ReactNode; optio
     }
 
     const contextValue: DCContextType = {
+        hasDynamicContent: options.length > 0,
         options,
         getDynamicContentBySlug
     };

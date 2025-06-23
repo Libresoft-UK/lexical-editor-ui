@@ -14,6 +14,10 @@ export type DCOption = {
 };
 export type DCContextType = {
     /**
+     * Boolean indicating if the dynamic content has any options
+     */
+    hasDynamicContent: boolean;
+    /**
      * An array of dynamic content options
      */
     options: DCOption[];

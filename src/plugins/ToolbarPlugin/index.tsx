@@ -101,6 +101,7 @@ import {
     TypeUnderline
 } from "react-bootstrap-icons";
 import {InsertDynamicContentDialog} from "../DynamicContentPlugin";
+import {useDynamicContent} from "../../context/DynamicContentContext";
 
 const rootTypeToRootName = {
   root: 'Root',
@@ -752,6 +753,8 @@ export default function ToolbarPlugin({
   const buttonClassName = 'cursor-pointer rounded hover:bg-default-900 hover:text-default-50 disabled:opacity-50';
   const activeButtonClassName = 'bg-default-500 text-default-50';
 
+  const {hasDynamicContent} = useDynamicContent();
+
   return (
       <div className="flex flex-row h-12 gap-2 p-1 overflow-y-auto">
       <button
@@ -1025,20 +1028,20 @@ export default function ToolbarPlugin({
                 >
                   <span className="text">Image</span>
                 </DropDownItem>
-                <DropDownItem
-                    onClick={() => {
-                        showModal('Insert Dynamic Content', (onClose) => (
-                        <InsertDynamicContentDialog
-                            activeEditor={activeEditor}
-                            onClose={onClose}
-                        />
-                        ));
-                    }}
-                    className="item"
-                    icon={<span className={'text-2xl leading-none'}>➲</span>}
-                >
-                    <span className="text">Dynamic Content</span>
-                </DropDownItem>
+                  {hasDynamicContent && <DropDownItem
+                      onClick={() => {
+                          showModal('Insert Dynamic Content', (onClose) => (
+                              <InsertDynamicContentDialog
+                                  activeEditor={activeEditor}
+                                  onClose={onClose}
+                              />
+                          ));
+                      }}
+                      className="item"
+                      icon={<span className={'text-2xl leading-none'}>➲</span>}
+                  >
+                      <span className="text">Dynamic Content</span>
+                  </DropDownItem>}
               </DropDown>
             </>
           )}

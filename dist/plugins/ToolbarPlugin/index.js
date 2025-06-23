@@ -22,6 +22,7 @@ import FontSize from './fontSize';
 import { clearFormatting, formatBulletList, formatHeading, formatNumberedList, formatParagraph, formatQuote, } from './utils';
 import { Alphabet, AlphabetUppercase, ArrowClockwise, ArrowCounterclockwise, Eraser, FileBreak, Image, Justify, ListOl, ListTask, PaintBucket, Quote, Scissors, Subscript, Superscript, TextCenter, TextIndentLeft, TextIndentRight, TextLeft, TextParagraph, TextRight, Type, TypeBold, TypeH1, TypeH2, TypeH3, TypeH4, TypeH5, TypeH6, TypeItalic, TypeStrikethrough, TypeUnderline } from "react-bootstrap-icons";
 import { InsertDynamicContentDialog } from "../DynamicContentPlugin";
+import { useDynamicContent } from "../../context/DynamicContentContext";
 const rootTypeToRootName = {
     root: 'Root',
     table: 'Table',
@@ -296,6 +297,7 @@ export default function ToolbarPlugin({ editor, activeEditor, setActiveEditor, s
     const canViewerSeeInsertCodeButton = !toolbarState.isImageCaption;
     const buttonClassName = 'cursor-pointer rounded hover:bg-default-900 hover:text-default-50 disabled:opacity-50';
     const activeButtonClassName = 'bg-default-500 text-default-50';
+    const { hasDynamicContent } = useDynamicContent();
     return (_jsxs("div", { className: "flex flex-row h-12 gap-2 p-1 overflow-y-auto", children: [_jsx("button", { disabled: !toolbarState.canUndo || !isEditable, onClick: () => {
                     activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
                 }, title: `Undo (${SHORTCUTS.UNDO})`, type: "button", className: buttonClassName, "aria-label": "Undo", children: _jsx(ArrowCounterclockwise, { size: 24 }) }), _jsx("button", { disabled: !toolbarState.canRedo || !isEditable, onClick: () => {
@@ -325,7 +327,7 @@ export default function ToolbarPlugin({ editor, activeEditor, setActiveEditor, s
                                     activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
                                 }, className: "item", icon: _jsx(Scissors, { size: 20 }), children: _jsx("span", { className: "text", children: "Page Break" }) }), _jsx(DropDownItem, { onClick: () => {
                                     showModal('Insert Image', (onClose) => (_jsx(InsertImageDialog, { activeEditor: activeEditor, onClose: onClose })));
-                                }, className: "item", icon: _jsx(Image, { size: 20 }), children: _jsx("span", { className: "text", children: "Image" }) }), _jsx(DropDownItem, { onClick: () => {
+                                }, className: "item", icon: _jsx(Image, { size: 20 }), children: _jsx("span", { className: "text", children: "Image" }) }), hasDynamicContent && _jsx(DropDownItem, { onClick: () => {
                                     showModal('Insert Dynamic Content', (onClose) => (_jsx(InsertDynamicContentDialog, { activeEditor: activeEditor, onClose: onClose })));
                                 }, className: "item", icon: _jsx("span", { className: 'text-2xl leading-none', children: "\u27B2" }), children: _jsx("span", { className: "text", children: "Dynamic Content" }) })] })] })), _jsx(Divider, {}), _jsx(ElementFormatDropdown, { disabled: !isEditable, value: toolbarState.elementFormat, editor: activeEditor, isRTL: toolbarState.isRTL }), modal] }));
 }
