@@ -23,5 +23,5 @@ export default function PasteLogPlugin() {
     }, [editor, isActive]);
     return (_jsxs(_Fragment, { children: [_jsx("button", { id: "paste-log-button", className: `editor-dev-button ${isActive ? 'active' : ''}`, onClick: () => {
                     setIsActive(!isActive);
-                }, title: isActive ? 'Disable paste log' : 'Enable paste log' }), isActive && lastClipboardData !== null ? (_jsx("pre", { children: lastClipboardData })) : null] }));
+                }, title: isActive ? 'Disable paste log' : 'Enable paste log', type: 'button' }), isActive && lastClipboardData !== null ? (_jsx("pre", { children: lastClipboardData })) : null] }));
 }

@@ -64,6 +64,7 @@ export default function DraggableBlockPlugin({
           <button
             title="Click to add below"
             onClick={insertBlock}
+            type="button"
           >
             <Plus size={18} className={'text-gray-400 hover:bg-blue-400 hover:text-white rounded'}/>
           </button>

@@ -47,6 +47,7 @@ export default function PasteLogPlugin(): JSX.Element {
           setIsActive(!isActive);
         }}
         title={isActive ? 'Disable paste log' : 'Enable paste log'}
+        type={'button'}
       />
       {isActive && lastClipboardData !== null ? (
         <pre>{lastClipboardData}</pre>

@@ -44,6 +44,7 @@ export default function Button({
       onClick={onClick}
       title={title}
       aria-label={title}
+      type={'button'}
       {...(dataTestId && {'data-test-id': dataTestId})}>
       {children}
     </button>
