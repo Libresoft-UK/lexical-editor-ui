@@ -68,7 +68,7 @@ export default function EmojiPickerPlugin() {
             }
             selection.insertNodes([$createTextNode(selectedOption.emoji)]);
             closeMenu();
-        });
+        }, { tag: 'emoji-selected' });
     }, [editor]);
     return (_jsx(LexicalTypeaheadMenuPlugin, { onQueryChange: setQueryString, onSelectOption: onSelectOption, triggerFn: checkForTriggerMatch, options: options, menuRenderFn: (anchorElementRef, { selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }) => {
             if (anchorElementRef.current == null || options.length === 0) {

@@ -31,7 +31,7 @@ export default function DraggableBlockPlugin({ anchorElem = document.body, }) {
                 node.insertAfter(pNode);
             }
             pNode.select();
-        });
+        }, { tag: 'insert-draggable-block' });
     }
     return (_jsx(DraggableBlockPlugin_EXPERIMENTAL, { anchorElem: anchorElem, menuRef: menuRef, targetLineRef: targetLineRef, menuComponent: _jsxs("div", { ref: menuRef, className: "icon draggable-block-menu absolute left-0 top-0 flex gap-0.5 cursor-grab items-center will-change-transform text-default-400", children: [_jsx("button", { title: "Click to add below", onClick: insertBlock, type: "button", children: _jsx(Plus, { size: 18, className: 'text-gray-400 hover:bg-blue-400 hover:text-white rounded' }) }), _jsx(Grid3x2GapFill, { size: 18, className: 'text-gray-400 hover:bg-blue-400 hover:text-white rounded p-0.5' })] }), targetLineComponent: _jsx("div", { ref: targetLineRef, className: "draggable-block-target-line pointer-events-none bg-blue-400 rounded h-1 absolute left-0 top-0 will-change-transform" }), isOnMenu: isOnMenu, onElementChanged: setDraggableElement }));
 }

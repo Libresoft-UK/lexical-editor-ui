@@ -195,8 +195,6 @@ interface LexicalEditorProps {
 
 export function LexicalEditor({src = null, onChange, debug = false, classNames, dynamicContentOptions = []}:LexicalEditorProps): JSX.Element {
 
-  const [editorState, setEditorState] = useState<string | null>(src);
-
   const initialConfig = {
     editorState: null,
     html: {import: buildImportMap()},
@@ -210,24 +208,19 @@ export function LexicalEditor({src = null, onChange, debug = false, classNames, 
 
   function handleOnChange(editorState: EditorState, editor: _LexicalEditor, tags: Set<string>) {
     debug && console.log('onChange', editorState, editor, tags);
-    if (tags.has('focus')) {
+    if (tags.has('focus') || tags.has('init')) {
       // prevent onChange from being called when the editor is focused on load
       return;
     }
     // Call toJSON on the EditorState object, which produces a serialization safe string
     const editorStateJSON = editorState.toJSON();
-    // Stringify the JSON object to a string
-    const jsonString = JSON.stringify(editorStateJSON);
     // export the editor state to HTML
     editor.read(() => {
       const htmlString = $generateHtmlFromNodes(editor, null);
       debug && console.log('HTML String:', htmlString);
       // Call onChange with the JSON string and the HTML string
-      onChange && onChange(jsonString, htmlString);
+      onChange && onChange(editorStateJSON, htmlString);
     })
-
-    // Set the editor state to the JSON string
-    setEditorState(jsonString);
 
   }
 

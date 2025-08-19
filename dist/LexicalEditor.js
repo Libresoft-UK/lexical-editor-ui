@@ -1,12 +1,4 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-import { useState } from 'react';
 import { $createLinkNode } from '@lexical/link';
 import { $createListItemNode, $createListNode } from '@lexical/list';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
@@ -112,7 +104,6 @@ function buildImportMap() {
     return importMap;
 }
 export function LexicalEditor({ src = null, onChange, debug = false, classNames, dynamicContentOptions = [] }) {
-    const [editorState, setEditorState] = useState(src);
     const initialConfig = {
         editorState: null,
         html: { import: buildImportMap() },
@@ -125,23 +116,19 @@ export function LexicalEditor({ src = null, onChange, debug = false, classNames,
     };
     function handleOnChange(editorState, editor, tags) {
         debug && console.log('onChange', editorState, editor, tags);
-        if (tags.has('focus')) {
+        if (tags.has('focus') || tags.has('init')) {
             // prevent onChange from being called when the editor is focused on load
             return;
         }
         // Call toJSON on the EditorState object, which produces a serialization safe string
         const editorStateJSON = editorState.toJSON();
-        // Stringify the JSON object to a string
-        const jsonString = JSON.stringify(editorStateJSON);
         // export the editor state to HTML
         editor.read(() => {
             const htmlString = $generateHtmlFromNodes(editor, null);
             debug && console.log('HTML String:', htmlString);
             // Call onChange with the JSON string and the HTML string
-            onChange && onChange(jsonString, htmlString);
+            onChange && onChange(editorStateJSON, htmlString);
         });
-        // Set the editor state to the JSON string
-        setEditorState(jsonString);
     }
     return (_jsxs(LexicalComposer, { initialConfig: initialConfig, children: [_jsx(SharedHistoryContext, { children: _jsx(DynamicContentProvider, { options: dynamicContentOptions, children: _jsxs(ToolbarContext, { children: [_jsx("div", { className: cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper), children: _jsx(Editor, { classNames: { content: classNames?.editor } }) }), debug && _jsx(TreeViewPlugin, {})] }) }) }), _jsx(InitialiseValuePlugin, { src: src }), _jsx(OnChangePlugin, { onChange: handleOnChange, ignoreSelectionChange: true })] }));
 }

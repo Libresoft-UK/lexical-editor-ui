@@ -1,5 +1,5 @@
 import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
-import {$createParagraphNode, $createTextNode, $getRoot, $insertNodes} from "lexical";
+import {$getRoot, $insertNodes} from "lexical";
 import {$generateNodesFromDOM} from '@lexical/html';
 import {useEffect, useState} from "react";
 
@@ -22,7 +22,7 @@ export default function InitialiseValuePlugin({src = null}: InitialiseValuePlugi
                // check if src is a valid JSON editorState, otherwise create a new one using the src value
                try {
                    const editorState = editor.parseEditorState(src);
-                   editor.setEditorState(editorState);
+                   editor.setEditorState(editorState, {tag: 'init'});
                } catch (e) {
                    // create a new editorState using the src value
                    editor.update(() => {
@@ -64,7 +64,7 @@ export default function InitialiseValuePlugin({src = null}: InitialiseValuePlugi
                        //     );
                        //     root.append(paragraph);
                        // }
-                   });
+                   }, {tag: 'init'});
                }
            }
         }

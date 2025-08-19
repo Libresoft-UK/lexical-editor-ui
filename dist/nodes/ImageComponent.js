@@ -137,7 +137,7 @@ export default function ImageComponent({ src, altText, nodeKey, width, height, m
                 if (parentRootElement !== null) {
                     parentRootElement.focus();
                 }
-            });
+            }, { tag: 'image-escape' });
             return true;
         }
         return false;
@@ -215,7 +215,7 @@ export default function ImageComponent({ src, altText, nodeKey, width, height, m
             if ($isImageNode(node)) {
                 node.setShowCaption(true);
             }
-        });
+        }, { tag: 'image-show-caption' });
     };
     const onResizeEnd = (nextWidth, nextHeight) => {
         // Delay hiding the resize bars for click case
@@ -227,7 +227,7 @@ export default function ImageComponent({ src, altText, nodeKey, width, height, m
             if ($isImageNode(node)) {
                 node.setWidthAndHeight(nextWidth, nextHeight);
             }
-        });
+        }, { tag: 'image-resized' });
     };
     const onResizeStart = () => {
         setIsResizing(true);

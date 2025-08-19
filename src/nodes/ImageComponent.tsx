@@ -257,7 +257,7 @@ export default function ImageComponent({
           if (parentRootElement !== null) {
             parentRootElement.focus();
           }
-        });
+        }, {tag: 'image-escape'});
         return true;
       }
       return false;
@@ -382,7 +382,7 @@ export default function ImageComponent({
       if ($isImageNode(node)) {
         node.setShowCaption(true);
       }
-    });
+    }, {tag: 'image-show-caption'});
   };
 
   const onResizeEnd = (
@@ -399,7 +399,7 @@ export default function ImageComponent({
       if ($isImageNode(node)) {
         node.setWidthAndHeight(nextWidth, nextHeight);
       }
-    });
+    }, {tag: 'image-resized'});
   };
 
   const onResizeStart = () => {

@@ -209,7 +209,7 @@ export default function ContextMenuPlugin(): JSX.Element {
       editor.update(() => {
         selectedOption.onSelect(targetNode);
         closeMenu();
-      });
+      }, {tag: 'context-menu-select'});
     },
     [editor],
   );
@@ -231,7 +231,7 @@ export default function ContextMenuPlugin(): JSX.Element {
           ];
         }
       }
-    });
+    }, {tag: 'context-menu-update'});
     setOptions(newOptions);
   };
 

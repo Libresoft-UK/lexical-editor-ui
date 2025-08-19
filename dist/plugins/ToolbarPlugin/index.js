@@ -111,7 +111,7 @@ function FontDropDown({ editor, value, style, disabled = false, }) {
                     [style]: option,
                 });
             }
-        });
+        }, { tag: 'toolbar-click' });
     }, [editor, style]);
     const buttonAriaLabel = style === 'font-family'
         ? 'Formatting options for font family'

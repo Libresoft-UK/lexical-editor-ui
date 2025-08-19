@@ -12,7 +12,7 @@ export default function InitialiseValuePlugin({ src = null }) {
                 // check if src is a valid JSON editorState, otherwise create a new one using the src value
                 try {
                     const editorState = editor.parseEditorState(src);
-                    editor.setEditorState(editorState);
+                    editor.setEditorState(editorState, { tag: 'init' });
                 }
                 catch (e) {
                     // create a new editorState using the src value
@@ -49,7 +49,7 @@ export default function InitialiseValuePlugin({ src = null }) {
                         //     );
                         //     root.append(paragraph);
                         // }
-                    });
+                    }, { tag: 'init' });
                 }
             }
         }

@@ -337,7 +337,7 @@ function FontDropDown({
             [style]: option,
           });
         }
-      });
+      }, {tag: 'toolbar-click'});
     },
     [editor, style],
   );

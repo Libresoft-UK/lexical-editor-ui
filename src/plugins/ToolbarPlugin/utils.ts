@@ -139,7 +139,7 @@ export const updateFontSizeInSelection = (
         });
       }
     }
-  });
+  }, {tag: 'font-size'});
 };
 
 export const updateFontSize = (
@@ -159,7 +159,7 @@ export const formatParagraph = (editor: LexicalEditor) => {
   editor.update(() => {
     const selection = $getSelection();
     $setBlocksType(selection, () => $createParagraphNode());
-  });
+  }, {tag: 'format-paragraph'});
 };
 
 export const formatHeading = (
@@ -171,7 +171,7 @@ export const formatHeading = (
     editor.update(() => {
       const selection = $getSelection();
       $setBlocksType(selection, () => $createHeadingNode(headingSize));
-    });
+    }, {tag: 'format-heading'});
   }
 };
 
@@ -207,7 +207,7 @@ export const formatQuote = (editor: LexicalEditor, blockType: string) => {
     editor.update(() => {
       const selection = $getSelection();
       $setBlocksType(selection, () => $createQuoteNode());
-    });
+    }, {tag: 'format-quote'});
   }
 };
 
@@ -229,7 +229,7 @@ export const formatCode = (editor: LexicalEditor, blockType: string) => {
           selection.insertRawText(textContent);
         }
       }
-    });
+    }, {tag: 'format-code'});
   }
 };
 
@@ -290,5 +290,5 @@ export const clearFormatting = (editor: LexicalEditor) => {
         }
       });
     }
-  });
+  }, {tag: 'clear-formatting'});
 };

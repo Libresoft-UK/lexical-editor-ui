@@ -112,7 +112,7 @@ export default function ContextMenuPlugin() {
         editor.update(() => {
             selectedOption.onSelect(targetNode);
             closeMenu();
-        });
+        }, { tag: 'context-menu-select' });
     }, [editor]);
     const onWillOpen = (event) => {
         let newOptions = defaultOptions;
@@ -131,7 +131,7 @@ export default function ContextMenuPlugin() {
                     ];
                 }
             }
-        });
+        }, { tag: 'context-menu-update' });
         setOptions(newOptions);
     };
     return (_jsx(LexicalContextMenuPlugin, { options: options, onSelectOption: onSelectOption, onWillOpen: onWillOpen, menuRenderFn: (anchorElementRef, { selectedIndex, options: _options, selectOptionAndCleanUp, setHighlightedIndex, }, { setMenuRef }) => anchorElementRef.current

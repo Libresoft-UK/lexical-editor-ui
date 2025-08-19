@@ -51,7 +51,7 @@ export default function DraggableBlockPlugin({
         node.insertAfter(pNode);
       }
       pNode.select();
-    });
+    }, {tag: 'insert-draggable-block'});
   }
 
   return (

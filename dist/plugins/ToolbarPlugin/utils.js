@@ -102,7 +102,7 @@ export const updateFontSizeInSelection = (editor, newFontSize, updateType) => {
                 });
             }
         }
-    });
+    }, { tag: 'font-size' });
 };
 export const updateFontSize = (editor, updateType, inputValue) => {
     if (inputValue !== '') {
@@ -117,14 +117,14 @@ export const formatParagraph = (editor) => {
     editor.update(() => {
         const selection = $getSelection();
         $setBlocksType(selection, () => $createParagraphNode());
-    });
+    }, { tag: 'format-paragraph' });
 };
 export const formatHeading = (editor, blockType, headingSize) => {
     if (blockType !== headingSize) {
         editor.update(() => {
             const selection = $getSelection();
             $setBlocksType(selection, () => $createHeadingNode(headingSize));
-        });
+        }, { tag: 'format-heading' });
     }
 };
 export const formatBulletList = (editor, blockType) => {
@@ -156,7 +156,7 @@ export const formatQuote = (editor, blockType) => {
         editor.update(() => {
             const selection = $getSelection();
             $setBlocksType(selection, () => $createQuoteNode());
-        });
+        }, { tag: 'format-quote' });
     }
 };
 export const formatCode = (editor, blockType) => {
@@ -178,7 +178,7 @@ export const formatCode = (editor, blockType) => {
                     selection.insertRawText(textContent);
                 }
             }
-        });
+        }, { tag: 'format-code' });
     }
 };
 export const clearFormatting = (editor) => {
@@ -236,5 +236,5 @@ export const clearFormatting = (editor) => {
                 }
             });
         }
-    });
+    }, { tag: 'clear-formatting' });
 };

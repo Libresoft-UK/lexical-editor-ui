@@ -149,7 +149,7 @@ export default function EmojiPickerPlugin() {
         selection.insertNodes([$createTextNode(selectedOption.emoji)]);
 
         closeMenu();
-      });
+      }, {tag: 'emoji-selected'});
     },
     [editor],
   );
