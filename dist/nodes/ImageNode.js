@@ -64,6 +64,7 @@ export class ImageNode extends DecoratorNode {
         element.setAttribute('alt', this.__altText);
         element.setAttribute('width', this.__width.toString());
         element.setAttribute('height', this.__height.toString());
+        element.style.display = 'inline-block';
         return { element };
     }
     static importDOM() {
