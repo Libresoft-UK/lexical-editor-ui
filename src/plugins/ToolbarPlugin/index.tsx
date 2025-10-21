@@ -102,6 +102,7 @@ import {
 } from "react-bootstrap-icons";
 import {InsertDynamicContentDialog} from "../DynamicContentPlugin";
 import {useDynamicContent} from "../../context/DynamicContentContext";
+import {pluginOptions} from "../../Editor";
 
 const rootTypeToRootName = {
   root: 'Root',
@@ -490,11 +491,13 @@ export default function ToolbarPlugin({
   activeEditor,
   setActiveEditor,
   setIsLinkEditMode,
+  plugins,
 }: {
   editor: LexicalEditor;
   activeEditor: LexicalEditor;
   setActiveEditor: Dispatch<LexicalEditor>;
   setIsLinkEditMode: Dispatch<boolean>;
+  plugins?: pluginOptions
 }): JSX.Element {
   const [selectedElementKey, setSelectedElementKey] = useState<NodeKey | null>(
     null,
@@ -757,28 +760,30 @@ export default function ToolbarPlugin({
 
   return (
       <div className="flex flex-row h-12 gap-2 p-1 overflow-y-auto">
-      <button
-        disabled={!toolbarState.canUndo || !isEditable}
-        onClick={() => {
-          activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
-        }}
-        title={`Undo (${SHORTCUTS.UNDO})`}
-        type="button"
-        className={buttonClassName}
-        aria-label="Undo">
-        <ArrowCounterclockwise size={24} />
-      </button>
-      <button
-        disabled={!toolbarState.canRedo || !isEditable}
-        onClick={() => {
-          activeEditor.dispatchCommand(REDO_COMMAND, undefined);
-        }}
-        title={`Redo (${SHORTCUTS.REDO})`}
-        type="button"
-        className={buttonClassName}
-        aria-label="Redo">
-        <ArrowClockwise size={24} />
-      </button>
+          {plugins?.history !== false && <>
+              <button
+                  disabled={!toolbarState.canUndo || !isEditable}
+                  onClick={() => {
+                      activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
+                  }}
+                  title={`Undo (${SHORTCUTS.UNDO})`}
+                  type="button"
+                  className={buttonClassName}
+                  aria-label="Undo">
+                  <ArrowCounterclockwise size={24}/>
+              </button>
+              <button
+                  disabled={!toolbarState.canRedo || !isEditable}
+                  onClick={() => {
+                      activeEditor.dispatchCommand(REDO_COMMAND, undefined);
+                  }}
+                  title={`Redo (${SHORTCUTS.REDO})`}
+                  type="button"
+                  className={buttonClassName}
+                  aria-label="Redo">
+                  <ArrowClockwise size={24}/>
+              </button>
+          </>}
       <Divider />
       {toolbarState.blockType in blockTypeToBlockName &&
         activeEditor === editor && (
@@ -952,28 +957,30 @@ export default function ToolbarPlugin({
         {/*    aria-label="Format text with a highlight">*/}
         {/*  <Highlighter size={24} />*/}
         {/*</button>*/}
-        <button
-            className={
-                buttonClassName + ' ' + (toolbarState.blockType === 'bullet' ? activeButtonClassName : '')
-            }
-            onClick={() => formatBulletList(editor, toolbarState.blockType)}
-            title={`Bullet List (${SHORTCUTS.BULLET_LIST})`}
-            aria-label={`Format text as bullet list. Shortcut: ${SHORTCUTS.BULLET_LIST}`}
-            type="button"
-        >
-          <ListTask size={24} />
-        </button>
-        <button
-            className={
-                buttonClassName + ' ' + (toolbarState.blockType === 'number' ? activeButtonClassName : '')
-            }
-            onClick={() => formatNumberedList(editor, toolbarState.blockType)}
-            title={`Numbered List (${SHORTCUTS.NUMBERED_LIST})`}
-            aria-label={`Format text as numbered list. Shortcut: ${SHORTCUTS.NUMBERED_LIST}`}
-            type="button"
-        >
-          <ListOl size={24} />
-        </button>
+          {plugins?.list !== false && <>
+              <button
+                  className={
+                      buttonClassName + ' ' + (toolbarState.blockType === 'bullet' ? activeButtonClassName : '')
+                  }
+                  onClick={() => formatBulletList(editor, toolbarState.blockType)}
+                  title={`Bullet List (${SHORTCUTS.BULLET_LIST})`}
+                  aria-label={`Format text as bullet list. Shortcut: ${SHORTCUTS.BULLET_LIST}`}
+                  type="button"
+              >
+                  <ListTask size={24}/>
+              </button>
+              <button
+                  className={
+                    buttonClassName + ' ' + (toolbarState.blockType === 'number' ? activeButtonClassName : '')
+                  }
+                  onClick={() => formatNumberedList(editor, toolbarState.blockType)}
+                  title={`Numbered List (${SHORTCUTS.NUMBERED_LIST})`}
+                  aria-label={`Format text as numbered list. Shortcut: ${SHORTCUTS.NUMBERED_LIST}`}
+                  type="button"
+              >
+                  <ListOl size={24}/>
+              </button>
+        </>}
         <button
             onClick={() => clearFormatting(activeEditor)}
             className={buttonClassName}
@@ -993,42 +1000,43 @@ export default function ToolbarPlugin({
                 buttonLabel="Insert"
                 buttonAriaLabel="Insert specialized editor node"
                 buttonIconClassName="icon plus">
-                <DropDownItem
-                  onClick={() => {
-                    activeEditor.dispatchCommand(
-                      INSERT_HORIZONTAL_RULE_COMMAND,
-                      undefined,
-                    );
-                  }}
-                  className="item"
-                  icon={<FileBreak size={20} />}
-                >
-                  <span className="text">Horizontal Rule</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
-                  }}
-                  className="item"
-                  icon={<Scissors size={20} />}
-                >
-                  <span className="text">Page Break</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    showModal('Insert Image', (onClose) => (
-                      <InsertImageDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ));
-                  }}
-                  className="item"
-                  icon={<Image size={20} />}
-                >
-                  <span className="text">Image</span>
-                </DropDownItem>
-                  {hasDynamicContent && <DropDownItem
+                  {plugins?.horizontalRule !== false && <DropDownItem
+                      onClick={() => {
+                          activeEditor.dispatchCommand(
+                              INSERT_HORIZONTAL_RULE_COMMAND,
+                              undefined,
+                          );
+                      }}
+                      className="item"
+                      icon={<FileBreak size={20}/>}
+                  >
+                      <span className="text">Horizontal Rule</span>
+                  </DropDownItem>}
+                  {plugins?.pageBreak !== false && <DropDownItem
+                      onClick={() => {
+                          activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
+                      }}
+                      className="item"
+                      icon={<Scissors size={20}/>}
+                  >
+                      <span className="text">Page Break</span>
+                  </DropDownItem>}
+                  {plugins?.images !== false && <DropDownItem
+                      onClick={() => {
+                          showModal('Insert Image', (onClose) => (
+                              <InsertImageDialog
+                                  activeEditor={activeEditor}
+                                  onClose={onClose}
+                              />
+                          ));
+                      }}
+                      className="item"
+                      icon={<Image size={20}/>}
+                  >
+                      <span className="text">Image</span>
+                  </DropDownItem>}
+                  {plugins?.dynamicContents !== false && <DropDownItem
+                      disabled={!hasDynamicContent}
                       onClick={() => {
                           showModal('Insert Dynamic Content', (onClose) => (
                               <InsertDynamicContentDialog

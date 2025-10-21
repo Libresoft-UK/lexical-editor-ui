@@ -25,7 +25,7 @@ class EmojiOption extends MenuOption {
 function EmojiMenuItem({ index, isSelected, onClick, onMouseEnter, option, }) {
     let className = 'item';
     if (isSelected) {
-        className += ' selected';
+        className += ' bg-default-300';
     }
     return (_jsx("li", { tabIndex: -1, className: className, ref: option.setRefElement, role: "option", "aria-selected": isSelected, id: 'typeahead-item-' + index, onMouseEnter: onMouseEnter, onClick: onClick, children: _jsxs("span", { className: "text", children: [option.emoji, " ", option.title] }) }, option.key));
 }

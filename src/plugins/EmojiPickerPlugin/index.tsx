@@ -55,7 +55,7 @@ function EmojiMenuItem({
 }) {
   let className = 'item';
   if (isSelected) {
-    className += ' selected';
+    className += ' bg-default-300';
   }
   return (
     <li

@@ -6,7 +6,7 @@
  *
  */
 
-import type {JSX} from 'react';
+import {JSX, useMemo} from 'react';
 
 import {AutoFocusPlugin} from '@lexical/react/LexicalAutoFocusPlugin';
 import {ClearEditorPlugin} from '@lexical/react/LexicalClearEditorPlugin';
@@ -37,16 +37,34 @@ import TabFocusPlugin from './plugins/TabFocusPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import ContentEditable from './ui/ContentEditable';
 import {cn} from "./utils/joinClasses";
-import KeywordsPlugin from "./plugins/KeywordsPlugin";
 import DynamicContentsPlugin from "./plugins/DynamicContentPlugin";
+
+export type pluginOptions = {
+  dragDropPaste?: boolean;
+  autoFocus?: boolean;
+  emojiPicker?: boolean;
+  emojis?: boolean;
+  history?: boolean;
+  list?: boolean;
+  quotes?: boolean;
+  images?: boolean;
+  horizontalRule?: boolean;
+  pageBreak?: boolean;
+  draggableBlock?: boolean;
+  floatingTextFormatToolbar?: boolean;
+  specialText?: boolean;
+  /* default: false */
+  dynamicContents?: boolean;
+}
 
 interface EditorProps {
   classNames?: {
     content?: string;
-  }
+  },
+  plugins?: pluginOptions;
 }
 
-export default function Editor({classNames}:EditorProps): JSX.Element {
+export default function Editor({classNames, plugins}:EditorProps): JSX.Element {
   const {historyState} = useSharedHistoryContext();
 
   const isEditable = useLexicalEditable();
@@ -89,49 +107,49 @@ export default function Editor({classNames}:EditorProps): JSX.Element {
           activeEditor={activeEditor}
           setActiveEditor={setActiveEditor}
           setIsLinkEditMode={setIsLinkEditMode}
+          plugins={plugins}
         />
 
-        <ShortcutsPlugin
+      <ShortcutsPlugin
           editor={activeEditor}
           setIsLinkEditMode={setIsLinkEditMode}
-        />
+      />
 
-      <div className={`editor-container tree-view`}>
-        <DragDropPaste />
-        <AutoFocusPlugin />
+      <div className={`editor-container`}>
         <SelectionAlwaysOnDisplay />
-        <ClearEditorPlugin />
-        <EmojiPickerPlugin />
-        <EmojisPlugin />
-        <HistoryPlugin externalHistoryState={historyState} />
-        <RichTextPlugin
-          contentEditable={
-            <div className={cn("editor-scroller overflow-auto", classNames?.content)}>
-              <div className="editor relative" ref={onRef}>
-                <ContentEditable placeholder={placeholder} />
-              </div>
-            </div>
-          }
-          ErrorBoundary={LexicalErrorBoundary}
-        />
-        <ListPlugin />
-        <ImagesPlugin />
-        <HorizontalRulePlugin />
         <TabFocusPlugin />
         <TabIndentationPlugin maxIndent={7} />
-        <PageBreakPlugin />
-        {floatingAnchorElem && !isSmallWidthViewport && (
-          <>
-            <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
-            <FloatingTextFormatToolbarPlugin
-              anchorElem={floatingAnchorElem}
-              setIsLinkEditMode={setIsLinkEditMode}
-            />
-          </>
-        )}
-        <SpecialTextPlugin />
-        <KeywordsPlugin />
-        <DynamicContentsPlugin />
+        <RichTextPlugin
+            contentEditable={
+              <div className={cn("editor-scroller overflow-auto", classNames?.content)}>
+                <div className="editor relative" ref={onRef}>
+                  <ContentEditable placeholder={placeholder} />
+                </div>
+              </div>
+            }
+            ErrorBoundary={LexicalErrorBoundary}
+        />
+        {plugins?.dragDropPaste !== false && <DragDropPaste />}
+        {plugins?.autoFocus !== false && <AutoFocusPlugin />}
+        {plugins?.emojiPicker !== false && <EmojiPickerPlugin />}
+        {plugins?.emojis !== false && <EmojisPlugin />}
+        {plugins?.history !== false && <HistoryPlugin externalHistoryState={historyState} />}
+
+        {plugins?.list !== false && <ListPlugin />}
+        {plugins?.images !== false && <ImagesPlugin />}
+        {plugins?.horizontalRule !== false && <HorizontalRulePlugin />}
+
+        {plugins?.pageBreak !== false && <PageBreakPlugin />}
+        {plugins?.floatingTextFormatToolbar !== false && floatingAnchorElem && !isSmallWidthViewport && (<>
+          <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
+          <FloatingTextFormatToolbarPlugin
+            anchorElem={floatingAnchorElem}
+            setIsLinkEditMode={setIsLinkEditMode}
+          />
+        </>)}
+        {plugins?.specialText !== false && <SpecialTextPlugin />}
+        {/*{plugins?.keywords !== false && <KeywordsPlugin />}*/}
+        {plugins?.dynamicContents !== false && <DynamicContentsPlugin />}
       </div>
     </>
   );

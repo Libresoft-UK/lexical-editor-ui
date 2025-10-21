@@ -8,9 +8,11 @@
 import type { JSX } from 'react';
 import { LexicalEditor } from 'lexical';
 import { Dispatch } from 'react';
-export default function ToolbarPlugin({ editor, activeEditor, setActiveEditor, setIsLinkEditMode, }: {
+import { pluginOptions } from "../../Editor";
+export default function ToolbarPlugin({ editor, activeEditor, setActiveEditor, setIsLinkEditMode, plugins, }: {
     editor: LexicalEditor;
     activeEditor: LexicalEditor;
     setActiveEditor: Dispatch<LexicalEditor>;
     setIsLinkEditMode: Dispatch<boolean>;
+    plugins?: pluginOptions;
 }): JSX.Element;

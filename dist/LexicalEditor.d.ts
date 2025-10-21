@@ -6,8 +6,9 @@
  *
  */
 import { JSX } from 'react';
+import { pluginOptions } from './Editor';
 import { DCOption } from "./context/DynamicContentContext";
-interface LexicalEditorProps {
+export interface LexicalEditorProps {
     src?: string | null;
     onChange?: (json: any, html: string) => void;
     debug?: boolean;
@@ -15,7 +16,7 @@ interface LexicalEditorProps {
         wrapper?: string;
         editor?: string;
     };
+    plugins?: pluginOptions;
     dynamicContentOptions?: DCOption[];
 }
-export declare function LexicalEditor({ src, onChange, debug, classNames, dynamicContentOptions }: LexicalEditorProps): JSX.Element;
-export {};
+export declare function LexicalEditor({ src, onChange, debug, classNames, plugins, dynamicContentOptions }: LexicalEditorProps): JSX.Element;

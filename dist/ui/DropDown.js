@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, } from 'react';
 import { createPortal } from 'react-dom';
 const DropDownContext = React.createContext(null);
 const dropDownPadding = 4;
-export function DropDownItem({ children, className, onClick, title, shortcut, icon, }) {
+export function DropDownItem({ children, className, onClick, title, shortcut, icon, disabled = false, }) {
     const ref = useRef(null);
     const dropDownContext = React.useContext(DropDownContext);
     if (dropDownContext === null) {
@@ -17,7 +17,7 @@ export function DropDownItem({ children, className, onClick, title, shortcut, ic
             registerItem(ref);
         }
     }, [ref, registerItem]);
-    return (_jsxs("button", { className: 'flex justify-between p-0.5 rounded text-default-500 hover:bg-default-500 hover:text-default-50 ' + className, onClick: onClick, ref: ref, title: title, type: "button", children: [_jsxs("div", { className: 'flex flex-row gap-2', children: [icon, children] }), shortcut && (_jsx("span", { className: "text-xs text-default-400", children: shortcut }))] }));
+    return (_jsxs("button", { className: 'flex justify-between p-0.5 rounded text-default-500 hover:bg-default-500 hover:text-default-50 disabled:opacity-75 disabled:pointer-events-none ' + className, onClick: onClick, ref: ref, title: title, disabled: disabled, type: "button", children: [_jsxs("div", { className: 'flex flex-row gap-2', children: [icon, children] }), shortcut && (_jsx("span", { className: "text-xs text-default-400", children: shortcut }))] }));
 }
 function DropDownItems({ children, dropDownRef, onClose, }) {
     const [items, setItems] = useState();
@@ -65,7 +65,7 @@ function DropDownItems({ children, dropDownRef, onClose, }) {
             highlightedItem.current.focus();
         }
     }, [items, highlightedItem]);
-    return (_jsx(DropDownContext.Provider, { value: contextValue, children: _jsx("div", { className: "fixed right-0 mt-2 w-56 origin-top-right rounded-md bg-default-50 shadow-md focus:outline-hidden flex flex-col gap-0.5 p-2 z-50", ref: dropDownRef, onKeyDown: handleKeyDown, children: children }) }));
+    return (_jsx(DropDownContext.Provider, { value: contextValue, children: _jsx("div", { className: "fixed right-0 mt-2 w-56 origin-top-right rounded-md bg-default-100 shadow-md focus:outline-hidden flex flex-col gap-0.5 p-2 z-50", ref: dropDownRef, onKeyDown: handleKeyDown, children: children }) }));
 }
 export default function DropDown({ disabled = false, buttonLabel, buttonAriaLabel, buttonClassName, buttonIconClassName, buttonElement, children, stopCloseOnClickSelf, }) {
     const dropDownRef = useRef(null);

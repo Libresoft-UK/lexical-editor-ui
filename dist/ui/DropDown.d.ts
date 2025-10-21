@@ -8,13 +8,14 @@
 import type { JSX } from 'react';
 import * as React from 'react';
 import { ReactNode } from 'react';
-export declare function DropDownItem({ children, className, onClick, title, shortcut, icon, }: {
+export declare function DropDownItem({ children, className, onClick, title, shortcut, icon, disabled, }: {
     children: React.ReactNode;
     className: string;
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     title?: string;
     shortcut?: string;
     icon?: ReactNode;
+    disabled?: boolean;
 }): import("react/jsx-runtime").JSX.Element;
 export default function DropDown({ disabled, buttonLabel, buttonAriaLabel, buttonClassName, buttonIconClassName, buttonElement, children, stopCloseOnClickSelf, }: {
     disabled?: boolean;

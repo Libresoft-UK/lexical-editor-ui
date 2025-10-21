@@ -1,6 +1,5 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
-import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
@@ -26,9 +25,8 @@ import TabFocusPlugin from './plugins/TabFocusPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import ContentEditable from './ui/ContentEditable';
 import { cn } from "./utils/joinClasses";
-import KeywordsPlugin from "./plugins/KeywordsPlugin";
 import DynamicContentsPlugin from "./plugins/DynamicContentPlugin";
-export default function Editor({ classNames }) {
+export default function Editor({ classNames, plugins }) {
     const { historyState } = useSharedHistoryContext();
     const isEditable = useLexicalEditable();
     const placeholder = 'Enter some rich text...';
@@ -55,5 +53,5 @@ export default function Editor({ classNames }) {
             window.removeEventListener('resize', updateViewPortWidth);
         };
     }, [isSmallWidthViewport]);
-    return (_jsxs(_Fragment, { children: [_jsx(ToolbarPlugin, { editor: editor, activeEditor: activeEditor, setActiveEditor: setActiveEditor, setIsLinkEditMode: setIsLinkEditMode }), _jsx(ShortcutsPlugin, { editor: activeEditor, setIsLinkEditMode: setIsLinkEditMode }), _jsxs("div", { className: `editor-container tree-view`, children: [_jsx(DragDropPaste, {}), _jsx(AutoFocusPlugin, {}), _jsx(SelectionAlwaysOnDisplay, {}), _jsx(ClearEditorPlugin, {}), _jsx(EmojiPickerPlugin, {}), _jsx(EmojisPlugin, {}), _jsx(HistoryPlugin, { externalHistoryState: historyState }), _jsx(RichTextPlugin, { contentEditable: _jsx("div", { className: cn("editor-scroller overflow-auto", classNames?.content), children: _jsx("div", { className: "editor relative", ref: onRef, children: _jsx(ContentEditable, { placeholder: placeholder }) }) }), ErrorBoundary: LexicalErrorBoundary }), _jsx(ListPlugin, {}), _jsx(ImagesPlugin, {}), _jsx(HorizontalRulePlugin, {}), _jsx(TabFocusPlugin, {}), _jsx(TabIndentationPlugin, { maxIndent: 7 }), _jsx(PageBreakPlugin, {}), floatingAnchorElem && !isSmallWidthViewport && (_jsxs(_Fragment, { children: [_jsx(DraggableBlockPlugin, { anchorElem: floatingAnchorElem }), _jsx(FloatingTextFormatToolbarPlugin, { anchorElem: floatingAnchorElem, setIsLinkEditMode: setIsLinkEditMode })] })), _jsx(SpecialTextPlugin, {}), _jsx(KeywordsPlugin, {}), _jsx(DynamicContentsPlugin, {})] })] }));
+    return (_jsxs(_Fragment, { children: [_jsx(ToolbarPlugin, { editor: editor, activeEditor: activeEditor, setActiveEditor: setActiveEditor, setIsLinkEditMode: setIsLinkEditMode, plugins: plugins }), _jsx(ShortcutsPlugin, { editor: activeEditor, setIsLinkEditMode: setIsLinkEditMode }), _jsxs("div", { className: `editor-container`, children: [_jsx(SelectionAlwaysOnDisplay, {}), _jsx(TabFocusPlugin, {}), _jsx(TabIndentationPlugin, { maxIndent: 7 }), _jsx(RichTextPlugin, { contentEditable: _jsx("div", { className: cn("editor-scroller overflow-auto", classNames?.content), children: _jsx("div", { className: "editor relative", ref: onRef, children: _jsx(ContentEditable, { placeholder: placeholder }) }) }), ErrorBoundary: LexicalErrorBoundary }), plugins?.dragDropPaste !== false && _jsx(DragDropPaste, {}), plugins?.autoFocus !== false && _jsx(AutoFocusPlugin, {}), plugins?.emojiPicker !== false && _jsx(EmojiPickerPlugin, {}), plugins?.emojis !== false && _jsx(EmojisPlugin, {}), plugins?.history !== false && _jsx(HistoryPlugin, { externalHistoryState: historyState }), plugins?.list !== false && _jsx(ListPlugin, {}), plugins?.images !== false && _jsx(ImagesPlugin, {}), plugins?.horizontalRule !== false && _jsx(HorizontalRulePlugin, {}), plugins?.pageBreak !== false && _jsx(PageBreakPlugin, {}), plugins?.floatingTextFormatToolbar !== false && floatingAnchorElem && !isSmallWidthViewport && (_jsxs(_Fragment, { children: [_jsx(DraggableBlockPlugin, { anchorElem: floatingAnchorElem }), _jsx(FloatingTextFormatToolbarPlugin, { anchorElem: floatingAnchorElem, setIsLinkEditMode: setIsLinkEditMode })] })), plugins?.specialText !== false && _jsx(SpecialTextPlugin, {}), plugins?.dynamicContents !== false && _jsx(DynamicContentsPlugin, {})] })] }));
 }

@@ -6,26 +6,20 @@
  *
  */
 
-import {JSX, useState} from 'react';
 
-import {$createLinkNode} from '@lexical/link';
-import {$createListItemNode, $createListNode} from '@lexical/list';
+import {JSX, useMemo} from 'react';
 import {LexicalComposer} from '@lexical/react/LexicalComposer';
-import {$createHeadingNode, $createQuoteNode} from '@lexical/rich-text';
 import {
-  $createParagraphNode,
-  $createTextNode,
-  $getRoot,
   $isTextNode,
   DOMConversionMap, EditorState,
     LexicalEditor as _LexicalEditor,
   TextNode,
+  Klass, LexicalNode
 } from 'lexical';
 
 import {SharedHistoryContext} from './context/SharedHistoryContext';
 import {ToolbarContext} from './context/ToolbarContext';
-import Editor from './Editor';
-import PlaygroundNodes from './nodes/PlaygroundNodes';
+import Editor, {pluginOptions} from './Editor';
 import {parseAllowedFontSize} from './plugins/ToolbarPlugin/fontSize';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import {parseAllowedColor} from './ui/ColorPicker';
@@ -37,85 +31,18 @@ import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import {cn} from "./utils/joinClasses";
 import {DCOption, DynamicContentProvider} from "./context/DynamicContentContext";
 
-function $prepopulatedRichText() {
-  const root = $getRoot();
-  if (root.getFirstChild() === null) {
-    const heading = $createHeadingNode('h1');
-    heading.append($createTextNode('Welcome to the playground'));
-    root.append(heading);
-    const quote = $createQuoteNode();
-    quote.append(
-      $createTextNode(
-        `In case you were wondering what the black box at the bottom is – it's the debug view, showing the current state of the editor. ` +
-          `You can disable it by pressing on the settings control in the bottom-left of your screen and toggling the debug view setting.`,
-      ),
-    );
-    root.append(quote);
-    const paragraph = $createParagraphNode();
-    paragraph.append(
-      $createTextNode('The playground is a demo environment built with '),
-      $createTextNode('@lexical/react').toggleFormat('code'),
-      $createTextNode('.'),
-      $createTextNode(' Try typing in '),
-      $createTextNode('some text').toggleFormat('bold'),
-      $createTextNode(' with '),
-      $createTextNode('different').toggleFormat('italic'),
-      $createTextNode(' formats.'),
-    );
-    root.append(paragraph);
-    const paragraph2 = $createParagraphNode();
-    paragraph2.append(
-      $createTextNode(
-        'Make sure to check out the various plugins in the toolbar. You can also use #hashtags or @-mentions too!',
-      ),
-    );
-    root.append(paragraph2);
-    const paragraph3 = $createParagraphNode();
-    paragraph3.append(
-      $createTextNode(`If you'd like to find out more about Lexical, you can:`),
-    );
-    root.append(paragraph3);
-    const list = $createListNode('bullet');
-    list.append(
-      $createListItemNode().append(
-        $createTextNode(`Visit the `),
-        $createLinkNode('https://lexical.dev/').append(
-          $createTextNode('Lexical website'),
-        ),
-        $createTextNode(` for documentation and more information.`),
-      ),
-      $createListItemNode().append(
-        $createTextNode(`Check out the code on our `),
-        $createLinkNode('https://github.com/facebook/lexical').append(
-          $createTextNode('GitHub repository'),
-        ),
-        $createTextNode(`.`),
-      ),
-      $createListItemNode().append(
-        $createTextNode(`Playground code can be found `),
-        $createLinkNode(
-          'https://github.com/facebook/lexical/tree/main/packages/lexical-playground',
-        ).append($createTextNode('here')),
-        $createTextNode(`.`),
-      ),
-      $createListItemNode().append(
-        $createTextNode(`Join our `),
-        $createLinkNode('https://discord.com/invite/KmG4wQnnD9').append(
-          $createTextNode('Discord Server'),
-        ),
-        $createTextNode(` and chat with the team.`),
-      ),
-    );
-    root.append(list);
-    const paragraph4 = $createParagraphNode();
-    paragraph4.append(
-      $createTextNode(
-        `Lastly, we're constantly adding cool new features to this playground. So make sure you check back here when you next get a chance :).`,
-      ),
-    );
-    root.append(paragraph4);
-  }
-}
+// Additional nodes imported from lexical packages
+import {ListItemNode, ListNode} from '@lexical/list';
+import {OverflowNode} from '@lexical/overflow';
+import {HorizontalRuleNode} from '@lexical/react/LexicalHorizontalRuleNode';
+import {HeadingNode, QuoteNode} from '@lexical/rich-text';
+
+// Custom nodes
+import {EmojiNode} from './nodes/EmojiNode';
+import {ImageNode} from './nodes/ImageNode';
+import {PageBreakNode} from './nodes/PageBreakNode';
+import {SpecialTextNode} from './nodes/SpecialTextNode';
+import {DynamicContentNode} from "./nodes/DynamicContentNode";
 
 function getExtraStyles(element: HTMLElement): string {
   // Parse styles from pasted input, but only if they match exactly the
@@ -182,7 +109,28 @@ function buildImportMap(): DOMConversionMap {
   return importMap;
 }
 
-interface LexicalEditorProps {
+const nodePluginMap: {node: Klass<LexicalNode>, key: keyof pluginOptions | 'base'}[] = [
+  { node: HeadingNode, key: 'base' },
+  { node: ListNode, key: 'list' },
+  { node: ListItemNode, key: 'list' },
+  { node: QuoteNode, key: 'quotes' },
+  { node: OverflowNode, key: 'base' },
+  { node: ImageNode, key: 'images' },
+  { node: EmojiNode, key: 'emojis' },
+  { node: HorizontalRuleNode, key: 'horizontalRule' },
+  { node: PageBreakNode, key: 'pageBreak' },
+  { node: SpecialTextNode, key: 'specialText' },
+  { node: DynamicContentNode, key: 'dynamicContents' },
+];
+
+function getEnabledNodes(plugins?: pluginOptions) {
+  if (!plugins) return nodePluginMap.map(({ node }) => node);
+  return nodePluginMap
+      .filter(({ key }) => plugins[key as keyof pluginOptions] !== false)
+      .map(({ node }) => node);
+}
+
+export interface LexicalEditorProps {
   src?: string | null;
   onChange?: (json: any, html: string) => void;
   debug?: boolean;
@@ -190,18 +138,21 @@ interface LexicalEditorProps {
     wrapper?: string;
     editor?: string;
   };
+  plugins?: pluginOptions
   dynamicContentOptions?: DCOption[];
 }
 
-export function LexicalEditor({src = null, onChange, debug = false, classNames, dynamicContentOptions = []}:LexicalEditorProps): JSX.Element {
+export function LexicalEditor({src = null, onChange, debug = false, classNames, plugins, dynamicContentOptions = []}:LexicalEditorProps): JSX.Element {
+
+  const enabledNodes = useMemo(() => getEnabledNodes(plugins), [plugins]);
 
   const initialConfig = {
     editorState: null,
     html: {import: buildImportMap()},
-    namespace: 'Playground',
-    nodes: [...PlaygroundNodes],
+    namespace: 'LexicalEditor',
+    nodes: [...enabledNodes],
     onError: (error: Error) => {
-      throw error;
+      //throw error;
     },
     theme: PlaygroundEditorTheme,
   };
@@ -230,7 +181,7 @@ export function LexicalEditor({src = null, onChange, debug = false, classNames, 
         <DynamicContentProvider options={dynamicContentOptions} >
           <ToolbarContext>
             <div className={cn('bg-default-100 text-default-900 flex flex-col h-full rounded-md p-1 overflow-auto shadow', classNames?.wrapper)}>
-              <Editor classNames={{content: classNames?.editor}}/>
+              <Editor classNames={{content: classNames?.editor}} plugins={plugins}/>
             </div>
             {debug && <TreeViewPlugin/>}
             {/*{isDevPlayground ? <DocsPlugin /> : null}*/}

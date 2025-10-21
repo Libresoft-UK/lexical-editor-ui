@@ -35,6 +35,7 @@ export function DropDownItem({
   title,
   shortcut,
   icon,
+  disabled = false,
 }: {
   children: React.ReactNode;
   className: string;
@@ -42,6 +43,7 @@ export function DropDownItem({
   title?: string;
   shortcut?: string;
   icon?: ReactNode;
+  disabled?: boolean;
 }) {
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -61,10 +63,11 @@ export function DropDownItem({
 
   return (
     <button
-      className={'flex justify-between p-0.5 rounded text-default-500 hover:bg-default-500 hover:text-default-50 '+className}
+      className={'flex justify-between p-0.5 rounded text-default-500 hover:bg-default-500 hover:text-default-50 disabled:opacity-75 disabled:pointer-events-none '+className}
       onClick={onClick}
       ref={ref}
       title={title}
+      disabled={disabled}
       type="button">
         <div className={'flex flex-row gap-2'}>
           {icon}
@@ -149,7 +152,7 @@ function DropDownItems({
 
   return (
     <DropDownContext.Provider value={contextValue}>
-      <div className="fixed right-0 mt-2 w-56 origin-top-right rounded-md bg-default-50 shadow-md focus:outline-hidden flex flex-col gap-0.5 p-2 z-50" ref={dropDownRef} onKeyDown={handleKeyDown}>
+      <div className="fixed right-0 mt-2 w-56 origin-top-right rounded-md bg-default-100 shadow-md focus:outline-hidden flex flex-col gap-0.5 p-2 z-50" ref={dropDownRef} onKeyDown={handleKeyDown}>
         {children}
       </div>
     </DropDownContext.Provider>
