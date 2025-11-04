@@ -1,4 +1,4 @@
-import type { EditorConfig, LexicalNode, SerializedTextNode, SerializedLexicalNode, DOMExportOutput, NodeKey } from 'lexical';
+import type { EditorConfig, LexicalNode, SerializedTextNode, SerializedLexicalNode, DOMExportOutput, NodeKey, LexicalEditor } from 'lexical';
 import { TextNode, LexicalUpdateJSON } from 'lexical';
 interface serializedDynamicContentNode extends SerializedTextNode {
     label?: string;
@@ -20,7 +20,7 @@ export declare class DynamicContentNode extends TextNode {
     exportJSON(): serializedDynamicContentNode;
     createDOM(config: EditorConfig): HTMLElement;
     updateDOM(prevNode: this, dom: HTMLElement, config: EditorConfig): boolean;
-    exportDOM(): DOMExportOutput;
+    exportDOM(editor: LexicalEditor): DOMExportOutput;
     canInsertTextBefore(): boolean;
     canInsertTextAfter(): boolean;
     isTextEntity(): boolean;

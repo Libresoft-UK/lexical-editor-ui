@@ -32,7 +32,7 @@ export default function DynamicContentsPlugin(): JSX.Element | null {
             editor.registerNodeTransform(DynamicContentNode, (node) => {
                 const selection = $getSelection();
                 if ($isRangeSelection(selection)) {
-                    if (selection.anchor.key === node.getKey() || selection.focus.key === node.getKey()) {
+                    if (selection.anchor.key === node.getKey() && selection.focus.key === node.getKey()) {
                         node.selectNext();
                     }
                 }

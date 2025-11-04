@@ -1,5 +1,5 @@
 
-import type {EditorConfig, LexicalNode, SerializedTextNode, SerializedLexicalNode, DOMExportOutput, NodeKey} from 'lexical';
+import type {EditorConfig, LexicalNode, SerializedTextNode, SerializedLexicalNode, DOMExportOutput, NodeKey, LexicalEditor} from 'lexical';
 
 import {$applyNodeReplacement, TextNode, LexicalUpdateJSON} from 'lexical';
 
@@ -68,21 +68,46 @@ export class DynamicContentNode extends TextNode {
     }
 
     createDOM(config: EditorConfig): HTMLElement {
+        // get the default dom element from TextNode
         const dom = super.createDOM(config);
-        dom.style.cursor = 'default';
-        dom.className = "dynamicContent bg-blue-300 text-white pr-1 rounded before:content-['➲'] before:bg-black before:text-white before:px-1 before:rounded-l before:me-1";
-        dom.innerText = this.getLabel();
-        dom.setAttribute('contenteditable', 'false');
+
+        // create a span to hold the token
+        let token = document.createElement('span');
+        // token.style.userSelect = 'none';
+        token.style.pointerEvents = 'none';
+        token.style.cursor = 'default';
+        token.className = "dynamicContent bg-blue-300 text-white pr-1 m-1 rounded before:content-['➲'] before:bg-black before:text-white before:px-1 before:rounded-l before:me-1";
+        token.innerText = this.getLabel();
+        token.setAttribute('contenteditable', 'false');
+
+        // clear existing dom content and append the token
+        dom.textContent = '';
+        dom.appendChild(token);
         return dom;
     }
 
     updateDOM(prevNode: this, dom: HTMLElement, config: EditorConfig): boolean {
-        return true;
+        return super.updateDOM(prevNode, dom, config);
     }
 
-    exportDOM(): DOMExportOutput {
-        const element = document.createTextNode(this.__text);
-        return {element};
+    exportDOM(editor: LexicalEditor): DOMExportOutput {
+        // Let the superclass produce the element so any character-level styles/formatting are preserved.
+        const output = super.exportDOM(editor);
+        const {element} = output;
+
+        if (element == null) {
+            return output;
+        }
+
+        const el = element as HTMLElement;
+
+        //find and replace the dynamicContent span with its label text
+        const dynamicContentSpan = el.querySelector('span.dynamicContent');
+        if (dynamicContentSpan) {
+            dynamicContentSpan.replaceWith(this.__text);
+        }
+
+        return {element: element};
     }
 
     canInsertTextBefore(): boolean {
